@@ -32,10 +32,10 @@ public class SignUpService {
         }
 
         // 비밀번호 유효 (길이, 특수문자 안되는 값 못 넣게 등)
-//        if(!password.matches("^(?=.*[A-Za-z])(?=.*\\d).{8,16}$\n")){
-//            System.out.println("비번 똑바로 입력하셈");
-//            return false;
-//        }
+        if(!password.matches("^(?=.*[A-Za-z])(?=.*\\d).{8,16}$")){
+            System.out.println("비번 똑바로 입력하셈");
+            return false;
+        }
 
         // 단과대학 유효한지
         if(college == null){

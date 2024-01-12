@@ -27,7 +27,7 @@ public class UserEntity {
     private Boolean isregistered; // 재학 상태 (True => 재학, False => 휴학)
     private String grade;
 
-    @Column(unique = true)
+    //@Column(unique = true)
     private String phonenumber;
 
     @CreationTimestamp
@@ -37,11 +37,11 @@ public class UserEntity {
 
     private String enrolldate; // 회비 납부 확인 후 수락 일자
 
-    @Column(unique = true)
+    //@Column(unique = true)
     private String nickname;
     private String role;
 
-    @Column(unique = true)
+    //@Column(unique = true)
     private String judgementkey; // 혹시 쓰일지 모르는 개인 key 값
 
 }
