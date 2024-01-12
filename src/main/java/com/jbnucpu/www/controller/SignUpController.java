@@ -17,13 +17,13 @@ public class SignUpController {
     }
 
     @GetMapping("/signup")
-    public String signUp(){
+    public String signUp() {
 
         return "signup";
     }
 
     @PostMapping("/signup")
-    public String processSignUp(SignUpDTO signUpDTO){
+    public String processSignUp(SignUpDTO signUpDTO) {
 
         Boolean isSigned = signUpService.processSignUp(signUpDTO);
 
