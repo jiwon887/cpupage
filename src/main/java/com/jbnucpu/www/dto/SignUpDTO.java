@@ -1,7 +1,9 @@
 package com.jbnucpu.www.dto;
 
+import com.jbnucpu.www.entity.UserEntity;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.catalina.User;
 
 @Getter
 @Setter
@@ -18,4 +20,25 @@ public class SignUpDTO {
     private String grade;
 
     private String phonenumber;
+
+    public UserEntity toEntity() {
+
+        UserEntity userEntity = new UserEntity();
+
+        userEntity.setName(name);
+        userEntity.setStudentnumber(studentnumber);
+        userEntity.setPassword(password);
+        userEntity.setCollege(college);
+        userEntity.setDepartment(department);
+        userEntity.setIsregistered(isregistered);
+        userEntity.setGrade(grade);
+        userEntity.setPhonenumber(phonenumber);
+
+        userEntity.setRole("ROLE_USER");
+        userEntity.setNickname(studentnumber);
+        userEntity.setEnrolldate("2024-00-00");
+        userEntity.setJudgementkey("aaaaaaaaaaaaaaaaaaa");
+
+        return userEntity;
+    }
 }
