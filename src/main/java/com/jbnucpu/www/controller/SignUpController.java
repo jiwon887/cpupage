@@ -10,9 +10,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class SignUpController {
     @GetMapping("/signup")
-    public String signup(){
+    public String signUp(){
 
         return "signup";
     }
 
+    @PostMapping("/signup")
+    public String processSignUp(SignUpDTO signUpDTO){
+
+        return "signup";
+    }
 }
