@@ -30,6 +30,6 @@ public class SaveController {
             System.out.println("content c");
         }
 
-        return type;
+        return "redirect:/"+type;
     }
 }
