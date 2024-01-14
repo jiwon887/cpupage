@@ -7,28 +7,28 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 public class EditorController {
 
-    @GetMapping("/editor/noitce")
+    @GetMapping("/editor/notice")
     public String noticeEditor(){
 
-        return "editornotice";
+        return "editor";
     }
 
-    @GetMapping("/editor/noitce/{no}")
+    @GetMapping("/editor/notice/{no}")
     public String noticeUpdateEditor(@PathVariable("no")Long no){
 
-        return "editornotice";
+        return "editor";
     }
 
     @GetMapping("/editor/content")
     public String contentEditor(){
 
-        return "editorcontent";
+        return "editor";
     }
 
     @GetMapping("/editor/content/{no}")
     public String contentUpdateEditor(@PathVariable("no")Long no){
 
-        return "editorcontent";
+        return "editor";
     }
 
     @GetMapping("/editor/study")
