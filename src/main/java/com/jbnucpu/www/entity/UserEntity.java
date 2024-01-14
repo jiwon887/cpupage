@@ -49,4 +49,10 @@ public class UserEntity {
     @OneToMany(mappedBy = "userEntity")
     private Set<StudyEnrollEntity> studyEnrollEntities = new HashSet<StudyEnrollEntity>();
 
+    public void addStudy(StudyEnrollEntity studyEnrollEntity) {
+
+        studyEnrollEntity.setUserEntity(this);
+        this.studyEnrollEntities.add(studyEnrollEntity);
+    }
+
 }

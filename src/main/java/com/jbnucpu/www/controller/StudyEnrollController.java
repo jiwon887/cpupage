@@ -25,8 +25,10 @@ public class StudyEnrollController {
     }
 
     // 스터디 신청
-    @PostMapping("/study/{no}")
-    public String enrollStudy(@PathVariable("no")Long no, Model model){
+    @PostMapping("/study/apply/{no}")
+    public String enrollStudy(@PathVariable("no")Long no){
+
+
 
         return "studylist";
     }

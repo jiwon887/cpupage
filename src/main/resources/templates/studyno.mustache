@@ -9,5 +9,8 @@
 <body>
 {{data.title}}
 {{#data}}{{id}}{{title}}{{/data}}
+<form action="/study/apply/{{data.id}}" method="post">
+    <input type="submit" value="신청">
+</form>
 </body>
 </html>
