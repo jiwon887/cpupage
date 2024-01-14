@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 public class ArticleDTO {
 
-    private String title;
+    private String title; // mustache form name 속성 기반으로 DTO에 넣어줌
 
     private String content;
 
