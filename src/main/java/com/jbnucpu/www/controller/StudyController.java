@@ -24,13 +24,6 @@ public class StudyController {
 
         return "studylist";
     }
-    
-    // 개별 스터디
-    @GetMapping("/study/{no}")
-    public String studyDetail(@PathVariable("no") Long no){
-
-        return "study";
-    }
 
     // 스터디 개설
     @GetMapping("/study/open")
