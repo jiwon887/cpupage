@@ -67,6 +67,8 @@ public class SignUpService {
         //암호화
         signUpDTO.setPassword(bCryptPasswordEncoder.encode(password));
         //judgement key setting
+
+
         UserEntity userEntity = signUpDTO.toEntity();
 
         userRepository.save(userEntity);

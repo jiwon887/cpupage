@@ -39,16 +39,4 @@ public class EditorController {
 
         return "editor";
     }
-
-    @GetMapping("/editor/study")
-    public String studyEditor(){
-
-        return "editorstudy";
-    }
-
-    @GetMapping("/editor/study/{no}")
-    public String studyUpdateEditor(@PathVariable("no")Long no){
-
-        return "editorstudy";
-    }
 }
