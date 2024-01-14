@@ -7,6 +7,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -43,5 +45,8 @@ public class UserEntity {
 
     //@Column(unique = true)
     private String judgementkey; // 혹시 쓰일지 모르는 개인 key 값
+
+    @OneToMany(mappedBy = "studyEntity")
+    private Set<StudyEnrollEntity> studyEnrollEntities = new HashSet<StudyEnrollEntity>();
 
 }

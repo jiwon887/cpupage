@@ -1,15 +1,14 @@
 package com.jbnucpu.www.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -52,4 +51,7 @@ public class StudyEntity {
 
     @UpdateTimestamp
     private Timestamp updateDate;
+
+    @OneToMany(mappedBy = "studyEntity")
+    private Set<StudyEnrollEntity> studyEnrollEntities = new HashSet<StudyEnrollEntity>();
 }
