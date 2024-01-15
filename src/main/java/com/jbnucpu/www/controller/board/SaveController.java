@@ -1,4 +1,4 @@
-package com.jbnucpu.www.controller;
+package com.jbnucpu.www.controller.board;
 
 import com.jbnucpu.www.dto.ArticleDTO;
 import com.jbnucpu.www.service.SaveService;

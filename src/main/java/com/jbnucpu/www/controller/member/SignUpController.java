@@ -1,4 +1,4 @@
-package com.jbnucpu.www.controller;
+package com.jbnucpu.www.controller.member;
 
 import com.jbnucpu.www.dto.SignUpDTO;
 import com.jbnucpu.www.service.SignUpService;

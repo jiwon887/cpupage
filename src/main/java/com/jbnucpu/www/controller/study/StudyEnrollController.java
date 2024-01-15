@@ -1,4 +1,4 @@
-package com.jbnucpu.www.controller;
+package com.jbnucpu.www.controller.study;
 
 import com.jbnucpu.www.service.StudyEnrollService;
 import org.springframework.stereotype.Controller;

@@ -1,4 +1,4 @@
-package com.jbnucpu.www.controller;
+package com.jbnucpu.www.controller.board;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
