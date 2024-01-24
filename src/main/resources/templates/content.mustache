@@ -7,6 +7,16 @@
     <title>Document</title>
 </head>
 <body>
-content page
+<h1>Content Page</h1>
+<a href="editor/content">자유글 쓰기</a>
+<div>
+    {{#contentList}}
+        <a href="content/{{id}}"><strong>번호:</strong> {{id}}</a>
+        <strong>이름:</strong> {{name}}
+        <strong>제목:</strong> {{title}}
+        <strong>내용:</strong> {{content}}
+        <br>
+    {{/contentList}}
+</div>
 </body>
 </html>
