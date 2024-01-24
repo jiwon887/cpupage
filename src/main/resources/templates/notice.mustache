@@ -7,6 +7,16 @@
     <title>Document</title>
 </head>
 <body>
-notice page
+    <h1>Notice Page</h1>
+    <a href="editor/notice">공지사항 쓰기</a>
+    <div>
+        {{#noticeList}}
+            <a href="notice/{{id}}"><strong>번호:</strong> {{id}}</a>
+            <strong>이름:</strong> {{name}}
+            <strong>제목:</strong> {{title}}
+            <strong>내용:</strong> {{content}}
+            <br>
+        {{/noticeList}}
+    </div>
 </body>
 </html>
