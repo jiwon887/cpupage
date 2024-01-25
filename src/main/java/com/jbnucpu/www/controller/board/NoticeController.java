@@ -48,8 +48,9 @@ public class NoticeController {
         articleDTO.setTitle(notice.getTitle());
         articleDTO.setContent(notice.getContent());
 
-        model.addAttribute("notice", articleDTO);
-        model.addAttribute("noticeId", id);
+        model.addAttribute("post", articleDTO);
+        model.addAttribute("id", id);
+        model.addAttribute("type", "notice");
 
         return "update_editor";
     }

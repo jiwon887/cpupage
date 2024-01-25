@@ -1,5 +1,6 @@
 package com.jbnucpu.www.controller.board;
 
+import com.jbnucpu.www.dto.ArticleDTO;
 import com.jbnucpu.www.entity.ContentEntity;
 import com.jbnucpu.www.entity.NoticeEntity;
 import com.jbnucpu.www.repository.ContentRepository;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -28,9 +30,38 @@ public class ContentController {
     }
 
     @GetMapping("/content/{id}")
-    public String noticeDetail(Model model, @PathVariable("id") Long id) {
+    public String contentDetail(Model model, @PathVariable("id") Long id) {
         ContentEntity content = this.readService.processContentRead(id);
         model.addAttribute("content", content);
         return "content_detail";
+    }
+
+    @GetMapping("/content/update/{id}")
+    public String updateContent(Model model, @PathVariable("id") Long id) {
+
+        ContentEntity content = this.readService.processContentRead(id);
+
+        ArticleDTO articleDTO = new ArticleDTO();
+        articleDTO.setTitle(content.getTitle());
+        articleDTO.setContent(content.getContent());
+
+        model.addAttribute("post", articleDTO);
+        model.addAttribute("id", id);
+        model.addAttribute("type", "content");
+
+
+        return "update_editor";
+    }
+
+    @PostMapping("/content/update/{id}")
+    public String processUpdateContent(ArticleDTO articleDTO, @PathVariable("id") Long id){
+
+        ContentEntity content = this.readService.processContentRead(id);
+        content.setTitle(articleDTO.getTitle());
+        content.setContent(articleDTO.getContent());
+
+        contentRepository.save(content);
+
+        return "main";
     }
 }

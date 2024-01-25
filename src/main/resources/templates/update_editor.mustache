@@ -2,14 +2,14 @@
 
 <div>
     <div>
-        <form action="/notice/update/{{noticeId}}" method="post" name="article">
+        <form action="/{{type}}/update/{{id}}" method="post" name="article">
             <div>
                 <label for="title">제목</label>
-                <input name="title" type="text" class="form-control" id="title" value="{{notice.title}}">
+                <input name="title" type="text" class="form-control" id="title" value="{{post.title}}">
             </div>
             <div>
                 <label for="content"> 내용</label>
-                <textarea name="content" class="form-control" id="content">{{notice.content}}</textarea>
+                <textarea name="content" class="form-control" id="content">{{post.content}}</textarea>
             </div>
             {{!<a href="/" role="button" class="btn btn-secondary">취소</a>}}
             <input type="submit" class="btn btn-primary" id="btn-save" value="수정완료">
