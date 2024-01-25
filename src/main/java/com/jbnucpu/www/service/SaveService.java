@@ -22,12 +22,9 @@ public class SaveService {
     //공지사항 저장
     public Boolean processNoticeSave(ArticleDTO articleDTO){
 
-        System.out.println("service aaaa");
         String title = articleDTO.getTitle();
         String content = articleDTO.getContent();
 
-        System.out.println(title);
-        System.out.println(content);
         // 제목 유효한지
         if(title == null){
             return false;

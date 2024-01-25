@@ -31,4 +31,10 @@ public class NoticeEntity {
     @UpdateTimestamp
     private Timestamp updateDate;
 
+    public void update(String title, String content, String name) {
+        this.title = title;
+        this.content = content;
+        this.name = "수정과";
+    }
+
 }

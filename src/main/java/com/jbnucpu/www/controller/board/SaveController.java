@@ -22,12 +22,10 @@ public class SaveController {
 
         if(type.equals("notice")){
             Boolean isSaved = saveService.processNoticeSave(articleDTO);
-            System.out.println("notice c");
         }
 
         if(type.equals("content")) {
             Boolean isSaved = saveService.processContentSave(articleDTO);
-            System.out.println("content c");
         }
 
         return "redirect:/"+type;

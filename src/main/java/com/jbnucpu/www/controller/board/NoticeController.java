@@ -1,9 +1,9 @@
 package com.jbnucpu.www.controller.board;
 
+import com.jbnucpu.www.dto.ArticleDTO;
 import com.jbnucpu.www.entity.NoticeEntity;
 import com.jbnucpu.www.repository.NoticeRepository;
 import com.jbnucpu.www.service.ReadService;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +21,7 @@ public class NoticeController {
 
     private final ReadService readService;
 
+
     @GetMapping("/notice")
     public String notice(Model model) {
         List<NoticeEntity> noticeEntityList = this.noticeRepository.findAll();
@@ -33,5 +34,32 @@ public class NoticeController {
         NoticeEntity notice = this.readService.processNoticeRead(id);
         model.addAttribute("notice", notice);
         return "notice_detail";
+    }
+
+    @GetMapping("/notice/update/{id}")
+    public String updateNotice(Model model, @PathVariable("id") Long id) {
+
+        NoticeEntity notice = this.readService.processNoticeRead(id);
+
+        ArticleDTO articleDTO = new ArticleDTO();
+        articleDTO.setTitle(notice.getTitle());
+        articleDTO.setContent(notice.getContent());
+
+        model.addAttribute("notice", articleDTO);
+        model.addAttribute("noticeId", id);
+
+        return "update_editor";
+    }
+
+    @PostMapping("/notice/update/{id}")
+    public String processUpdateNotice(ArticleDTO articleDTO, @PathVariable("id") Long id){
+
+        NoticeEntity notice = this.readService.processNoticeRead(id);
+        notice.setTitle(articleDTO.getTitle());
+        notice.setContent(articleDTO.getContent());
+
+        noticeRepository.save(notice);
+
+        return "main";
     }
 }
