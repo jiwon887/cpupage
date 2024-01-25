@@ -1,6 +1,7 @@
 package com.jbnucpu.www.controller.board;
 
 import com.jbnucpu.www.entity.ContentEntity;
+import com.jbnucpu.www.entity.NoticeEntity;
 import com.jbnucpu.www.repository.ContentRepository;
 import com.jbnucpu.www.service.ReadService;
 import lombok.RequiredArgsConstructor;
