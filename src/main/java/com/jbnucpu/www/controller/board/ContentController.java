@@ -4,6 +4,7 @@ import com.jbnucpu.www.dto.ArticleDTO;
 import com.jbnucpu.www.entity.ContentEntity;
 import com.jbnucpu.www.entity.NoticeEntity;
 import com.jbnucpu.www.repository.ContentRepository;
+import com.jbnucpu.www.service.DeleteService;
 import com.jbnucpu.www.service.ReadService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,8 @@ public class ContentController {
     private final ContentRepository contentRepository;
 
     private final ReadService readService;
+
+    private final DeleteService deleteService;
 
     @GetMapping("/content")
     public String content(Model model){
@@ -63,5 +66,13 @@ public class ContentController {
         contentRepository.save(content);
 
         return "main";
+    }
+
+    @GetMapping("/content/delete/{id}")
+    public String processDeleteContent(@PathVariable("id") Long id){
+
+        deleteService.processContentDelete(id);
+
+        return "redirect:/content";
     }
 }
