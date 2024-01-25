@@ -64,7 +64,7 @@ public class NoticeController {
 
         noticeRepository.save(notice);
 
-        return "main";
+        return "redirect:/notice";
     }
 
     @GetMapping("/notice/delete/{id}")

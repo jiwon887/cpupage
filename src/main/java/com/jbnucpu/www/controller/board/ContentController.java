@@ -65,7 +65,7 @@ public class ContentController {
 
         contentRepository.save(content);
 
-        return "main";
+        return "redirect:/content";
     }
 
     @GetMapping("/content/delete/{id}")
