@@ -14,6 +14,7 @@ import java.util.Set;
 @Getter
 @Setter
 public class StudyEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -52,6 +53,7 @@ public class StudyEntity {
     @UpdateTimestamp
     private Timestamp updateDate;
 
-    @OneToMany(mappedBy = "studyEntity")
+    @OneToMany(mappedBy = "studyEntity",cascade = CascadeType.ALL)
     private Set<StudyEnrollEntity> studyEnrollEntities = new HashSet<StudyEnrollEntity>();
+
 }

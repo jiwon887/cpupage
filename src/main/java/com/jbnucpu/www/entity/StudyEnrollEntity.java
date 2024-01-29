@@ -12,10 +12,15 @@ public class StudyEnrollEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    //studyEntity목록만 단일로 사용하는 경우가 많으니 지연로딩 걸어놓음
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "studyEntity_id")
     private StudyEntity studyEntity;
 
-    @ManyToOne
+    //회원정보수정시 단일로 사용하는 경우 많으니 지연로딩 걸어놓음
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="userEntity_id")
     private UserEntity userEntity;
 
+    //todo n+1문제 발생 해결
 }

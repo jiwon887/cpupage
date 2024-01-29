@@ -14,6 +14,10 @@ public class StudyDTO {
     @NotEmpty
     private String title;
 
+    /*@NotNull
+    @NotEmpty*/
+    private String studentNumber; // 작성자
+
     @NotNull
     @NotEmpty
     private String name;
@@ -66,6 +70,7 @@ public class StudyDTO {
         StudyEntity studyEntity = new StudyEntity();
 
         studyEntity.setTitle(title);
+        studyEntity.setStudentNumber(studentNumber);
         studyEntity.setName(name);
         studyEntity.setGrade(grade);
         studyEntity.setCollege(college);
@@ -82,4 +87,23 @@ public class StudyDTO {
         return studyEntity;
     }
 
+    public StudyEntity toEntity_ExceptStudentNumber(){
+        StudyEntity studyEntity = new StudyEntity();
+
+        studyEntity.setTitle(title);
+        studyEntity.setName(name);
+        studyEntity.setGrade(grade);
+        studyEntity.setCollege(college);
+        studyEntity.setDepartment(department);
+        studyEntity.setPhoneNumber(phoneNumber);
+        studyEntity.setStudySubject(studySubject);
+        studyEntity.setStudyGoal(studyGoal);
+        studyEntity.setStudyMethod(studyMethod);
+        studyEntity.setStudyReference(studyReference);
+        studyEntity.setStudyTime(studyTime);
+        studyEntity.setStudyPlace(studyPlace);
+        studyEntity.setManagerExperience(managerExperience);
+
+        return studyEntity;
+    }
 }
