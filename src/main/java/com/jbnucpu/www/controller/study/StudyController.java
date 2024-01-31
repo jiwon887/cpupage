@@ -22,7 +22,7 @@ public class StudyController {
     // 스터디 메인 (스터디 목록 보여줌)
     @GetMapping("/study")
     public String studyList(Model model){
-        model.addAttribute("studydatas",studyService.getList());
+        model.addAttribute("studyEntityList_data",studyService.getList());
         return "studylist";
     }
 
@@ -30,8 +30,8 @@ public class StudyController {
     @GetMapping("/study/{no}")
     public String studyNo(@PathVariable("no")Long no, Model model){
 
-        model.addAttribute("studydata", studyService.findStudy(no).get());
-        model.addAttribute("studyMemberdata", studyService.findStudyMember(no));
+        model.addAttribute("studyEntity_data", studyService.findStudy(no));
+        model.addAttribute("enrollEntities_data", studyService.findEnrollEntities(no));
 
         return "studyno";
     }
@@ -54,7 +54,7 @@ public class StudyController {
     // 스터디 수정
     @GetMapping("/study/edit/{no}")
     public String studyUpdateForm(@PathVariable("no")Long no, Model model){
-        model.addAttribute("studydata", studyService.findStudy(no).get());
+        model.addAttribute("studyEntity_data", studyService.findStudy(no));
         return "studyedit";
     }
 
@@ -82,9 +82,8 @@ public class StudyController {
 
     // 스터디 삭제
     @PostMapping("/study/quit/{no}")
-    public String studyQuit(@PathVariable("no")Long no){
-        studyService.quitStudy(no);
-
+    public String studyQuit(){
+        studyService.quitStudy();
         return "redirect:/study/{no}";
     }
 
