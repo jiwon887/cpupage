@@ -8,6 +8,9 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -36,7 +39,7 @@ public class UpdateMemberService implements UserDetailsService {
         return new CustomUserDetails(user);
     }
     @Transactional
-    public void updateMember(String name, String newPassword, String newName, String newPhoneNumber, String newNickName){
+    public String updateMember(String name, String newPassword, String newName, String newPhoneNumber, String newNickName){
 
         UserEntity user = userRepository.findByName(name);
 
@@ -59,26 +62,17 @@ public class UpdateMemberService implements UserDetailsService {
         }
 
         userRepository.save(user);
+
+        //UserDetails에 회원 정보 객체 담기
+        CustomUserDetails customUserDetails = new CustomUserDetails(user);
+        //스프링 시큐리티 인증 토큰 생성
+        Authentication authToken  = new UsernamePasswordAuthenticationToken(customUserDetails, null, customUserDetails.getAuthorities());
+        //세션에 사용자 등록
+        SecurityContextHolder.getContext().setAuthentication(authToken);
+
+        return ("/");
     }
 
-    public String reGenerateSession(@Valid @ModelAttribute HttpSession session,HttpServletRequest request) {
-
-        session.invalidate();
-
-        HttpSession newSession = request.getSession(true);
-
-        CustomUserDetails userDetails =(CustomUserDetails) Objects.requireNonNull(session.getAttribute(SessionConst.LOGIN));
-
-        newSession.setAttribute(SessionConst.LOGIN, userDetails);
-
-
-
-        return "/";
-    }
-
-    public class SessionConst{
-        public static final String LOGIN = "longin member";
-    }
 
 
 }
