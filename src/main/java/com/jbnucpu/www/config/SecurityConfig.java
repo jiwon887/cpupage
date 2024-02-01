@@ -24,6 +24,10 @@ public class SecurityConfig {
         http
                 .csrf((csrf) -> csrf.disable());
 
+        //http basic 방식 인증 disable
+        http
+                .httpBasic((basic) -> basic.disable());
+
         http
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/signup", "/signinProc", "/signin").permitAll()
