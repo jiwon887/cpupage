@@ -9,17 +9,53 @@
 <body>
     <h1>부원신청</h1>
     <hr>
-    <form action="/signup" method="post" name="signUpForm">
-        <input id="name" type="text" name="name" placeholder="name"/>
-        <input id="studentnumber" type="text" name="studentnumber" placeholder="student number"/>
-        <input id="password" type="password" name="password" placeholder="password"/>
-        <input id="college" type="text" name="college" placeholder="college"/>
-        <input id="department" type="text" name="department" placeholder="department"/>
-        <input id="isregistered" type="checkbox" name="isregistered" checked>
-        <label>재학중</label>
-        <input id="grade" type="text" name="grade" placeholder="grade"/>
-        <input id="phonenumber" type="text" name="phonenumber" placeholder="phonenumber"/>
-        <input type="submit" value="가입"/>
-    </form>
+    <div>
+        <form action="/signup" method="post" name="signUpForm">
+            <input id="name" type="text" name="name" placeholder="name"/><br>
+            <input id="studentnumber" type="text" name="studentnumber" placeholder="student number"/><br>
+            <div class="POST"> <!--기준-->
+                <input type="submit" value="중복 확인">
+            </div>
+            <input id="password" type="password" name="password" placeholder="password"/><br>
+            <input id="college" type="text" name="college" placeholder="college"/> <br>
+            <input id="department" type="text" name="department" placeholder="department"/><br>
+            <input id="isregistered" type="checkbox" name="isregistered" checked>
+            <label>재학중</label><br>
+            <input id="grade" type="text" name="grade" placeholder="grade"/><br>
+            <input id="phonenumber" type="text" name="phonenumber" placeholder="phonenumber"/><br>
+            <input type="submit" value="가입"/>
+        </form>
+    </div>
+<script>
+    isChckBtn.addEventListener('click', () => {
+        const studentnumber = document.querySelector("#studentnumber");
+
+        const reqJson = new Object();
+        reqJson.studentnumber = studentnumber.value;
+
+        const xmlhttp = new XMLHttpRequestUpload();
+        xmlhttp.open('POST', 'http://localhost:8080/check',true);
+        xmlhttp.setRequestHeader('Content-Type','application/json');
+        xmlhttp.send(JSON.stringify(reqJson));
+    })
+
+    xmlhttp.onreadystatechange = () => {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
+            if(xmlhttp.response == 'true') {
+                window.addEventListener('load',function () {
+                    let parent = document.querySelector(".POST");
+                    parent.insertAdjacentHTML('afterbegin',"사용할 수 있는 학번입니다.")
+                })
+            }else{
+                window.addEventListener('load', function () {
+                    let parent = document.querySelector(".POST");
+                    parent.insertAdjacentHTML('afterbegin',"사용할 수 있는 학번입니다.")
+                })
+            }
+        } else {
+            console.log('연결 에러');
+        }
+    }
+</script>
 </body>
 </html>
