@@ -46,7 +46,7 @@ public class UserEntity {
     //@Column(unique = true)
     private String judgementkey; // 혹시 쓰일지 모르는 개인 key 값
 
-    @OneToMany(mappedBy = "userEntity")
+    @OneToMany(mappedBy = "userEntity",cascade = CascadeType.ALL)
     private Set<StudyEnrollEntity> studyEnrollEntities = new HashSet<StudyEnrollEntity>();
 
     public void addStudy(StudyEnrollEntity studyEnrollEntity) {

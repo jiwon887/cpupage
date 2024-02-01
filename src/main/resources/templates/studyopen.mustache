@@ -2,6 +2,9 @@
 
 <div>
     <div>
+        {{#errorMessage}}
+            <p style="color: red;">{{errorMessage}}</p>
+        {{/errorMessage}}
         <form action="/study/open" method="post" name="study">
             <div>
                 <label for="title">제목</label>
