@@ -8,4 +8,5 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     Boolean existsByStudentnumber(String studentnumber);
 
     UserEntity findByStudentnumber(String studentnumber);
+
 }

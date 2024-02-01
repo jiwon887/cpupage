@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthService {
 
-
+    //로그인 아이디 (학번) 가져오기
     public String getUsername(){
 
         return SecurityContextHolder.getContext().getAuthentication().getName();
