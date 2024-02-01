@@ -8,9 +8,12 @@
     <title>Document</title>
 </head>
 <body>
+
     <h1>{{content.title}}</h1>
-    <div>{{content.content}}</div>
+    <hr>
     <a href="/content/update/{{content.id}}">수정</a>
     <a href="/content/delete/{{content.id}}">삭제</a>
-</body>
+    <hr>
+    <div>{{{content.content}}}</div>
+    </body>
 </html>
