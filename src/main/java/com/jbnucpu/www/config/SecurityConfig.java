@@ -37,6 +37,15 @@ public class SecurityConfig {
                         .defaultSuccessUrl("/")
                 );
 
+        http
+            .sessionManagement((auth) -> auth
+                    .maximumSessions(2)
+                    .maxSessionsPreventsLogin(true));
+        
+        http
+            .sessionManagement((auth) -> auth
+                    .sessionFixation().changeSessionId());
+
         return http.build();
     }
 }
