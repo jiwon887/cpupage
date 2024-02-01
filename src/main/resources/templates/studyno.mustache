@@ -1,4 +1,4 @@
-<html>
+<html lang="">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-{{studydata.title}}
+{{studyEntity_data.title}}
 <div>
     <table>
         <thead>
@@ -32,50 +32,49 @@
         </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>{{studydata.id}}</td>
-                <td>{{studydata.title}}</td>
-                <td>{{studydata.studentNumber}}</td>
-                <td>{{studydata.name}}</td>
-                <td>{{studydata.grade}}</td>
-                <td>{{studydata.college}}</td>
-                <td>{{studydata.department}}</td>
-                <td>{{studydata.phoneNumber}}</td>
-                <td>{{studydata.studySubject}}</td>
-                <td>{{studydata.studyGoal}}</td>
-                <td>{{studydata.studyMethod}}</td>
-                <td>{{studydata.studyReference}}</td>
-                <td>{{studydata.studyTime}}</td>
-                <td>{{studydata.studyPlace}}</td>
-                <td>{{studydata.managerExperience}}</td>
-                <td>{{studydata.createDate}}</td>
-                <td>{{studydata.updateDate}}</td>
+        <tr>
+            <td>{{studyEntity_data.id}}</td>
+            <td>{{studyEntity_data.title}}</td>
+            <td>{{studyEntity_data.studentNumber}}</td>
+            <td>{{studyEntity_data.name}}</td>
+            <td>{{studyEntity_data.grade}}</td>
+            <td>{{studyEntity_data.college}}</td>
+            <td>{{studyEntity_data.department}}</td>
+            <td>{{studyEntity_data.phoneNumber}}</td>
+            <td>{{studyEntity_data.studySubject}}</td>
+            <td>{{studyEntity_data.studyGoal}}</td>
+            <td>{{studyEntity_data.studyMethod}}</td>
+            <td>{{studyEntity_data.studyReference}}</td>
+            <td>{{studyEntity_data.studyTime}}</td>
+            <td>{{studyEntity_data.studyPlace}}</td>
+            <td>{{studyEntity_data.managerExperience}}</td>
+            <td>{{studyEntity_data.createDate}}</td>
+            <td>{{studyEntity_data.updateDate}}</td>
 
-            </tr>
+        </tr>
         </tbody>
     </table>
 </div>
 <div>
     <h2>스터디 멤버</h2>
     <ul>
-        <!--studyMemberdata=Set<EnrollEntity>-->
-        {{#studyMemberdata}}
+        {{#enrollEntities_data}}
             <li>{{userEntity.name}}</li>
-        {{/studyMemberdata}}
+        {{/enrollEntities_data}}
     </ul>
 </div>
 <div>
     <input type="submit" class="btn btn-primary" id="btn-save" value="참여자 조회">
-    <form action="/study/edit/{{studydata.id}}" method="get">
+    <form action="/study/edit/{{studyEntity_data.id}}" method="get">
         <input type="submit" class="btn btn-primary" id="btn-edit" value="수정">
     </form>
-    <form action="/study/delete/{{studydata.id}}" method="get">
+    <form action="/study/delete/{{studyEntity_data.id}}" method="get">
         <input type="submit" class="btn btn-primary" id="btn-delete" value="삭제">
     </form>
-    <form action="/study/quit/{{studydata.id}}" method="post">
+    <form action="/study/quit/{{studyEntity_data.id}}" method="post">
         <input type="submit" class="btn btn-primary" id="btn-quit" value="탈퇴">
     </form>
-    <form action="/study/apply/{{studydata.id}}" method="post">
+    <form action="/study/apply/{{studyEntity_data.id}}" method="post">
         <input type="submit" value="신청">
     </form>
 </div>
