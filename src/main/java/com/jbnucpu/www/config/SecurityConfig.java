@@ -9,6 +9,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+/**
+ * 시큐리티의 기본적인 설정을 담당하는 Config 클래스
+ * @author 김지훈
+ *
+ **/
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
