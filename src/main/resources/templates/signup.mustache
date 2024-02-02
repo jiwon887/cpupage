@@ -34,7 +34,7 @@
         reqJson.studentnumber = studentnumber.value;
 
         const xmlhttp = new XMLHttpRequestUpload();
-        xmlhttp.open('POST', 'http://localhost:8080/check',true);
+        xmlhttp.open('POST', 'http://localhost:8080/check/id',true);
         xmlhttp.setRequestHeader('Content-Type','application/json');
         xmlhttp.send(JSON.stringify(reqJson));
     })

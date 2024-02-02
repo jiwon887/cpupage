@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -15,6 +16,19 @@ public class CheckController {
     @Autowired
     private CheckService checkService;
 
+    // 아이디 체크 요청
+    @PostMapping("/check/id")
+    public Boolean checkIdPage(@RequestBody String studentnumber){
+
+        boolean idCorrect = checkService.checkPassword(studentnumber);
+
+        System.out.println("idCorrect값은?");
+        System.out.println(idCorrect);
+
+        return idCorrect;
+    }
+
+    // 비밀번호 체크 페이지
     @GetMapping("/check")
     public String checkPasswordPage(){
 

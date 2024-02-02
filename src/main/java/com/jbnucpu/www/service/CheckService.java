@@ -19,6 +19,17 @@ public class CheckService {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
+    public boolean checkId(String studentNumber) {
+
+        if (!userRepository.existsByStudentnumber(studentNumber)) {
+            System.out.println("통과!");
+            return true;
+        } else {
+            System.out.println("이미 가입된 학번이에용");
+            return false;
+        }
+    }
+
     public boolean checkPassword(String enteredPassword) {
 
         try{
