@@ -53,6 +53,8 @@ public class SaveService {
 
         UserEntity loginUser = userRepository.findByStudentnumber(loginStudentNumber);
 
+        noticeEntity.setStudentNumber(loginStudentNumber);
+
         noticeEntity.setName(loginUser.getName());
 
         noticeRepository.save(noticeEntity);
@@ -94,6 +96,8 @@ public class SaveService {
         String loginStudentNumber = SecurityContextHolder.getContext().getAuthentication().getName();
 
         UserEntity loginUser = userRepository.findByStudentnumber(loginStudentNumber);
+
+        contentEntity.setStudentNumber(loginStudentNumber);
 
         contentEntity.setName(loginUser.getName());
         
