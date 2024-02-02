@@ -3,6 +3,7 @@ package com.jbnucpu.www.controller.board;
 import com.jbnucpu.www.dto.ArticleDTO;
 import com.jbnucpu.www.entity.NoticeEntity;
 import com.jbnucpu.www.repository.NoticeRepository;
+import com.jbnucpu.www.service.AuthService;
 import com.jbnucpu.www.service.DeleteService;
 import com.jbnucpu.www.service.ReadService;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,8 @@ public class NoticeController {
 
     private final DeleteService deleteService;
 
+    private final AuthService authService;
+
     @GetMapping("/notice")
     public String notice(Model model) {
         List<NoticeEntity> noticeEntityList = this.noticeRepository.findAll();
@@ -41,8 +44,18 @@ public class NoticeController {
 
     @GetMapping("/notice/update/{id}")
     public String updateNotice(Model model, @PathVariable("id") Long id) {
+        
+        if(!authService.isAuthenticated()){
+            System.out.println("수정 실패: 로그인 한 사용자만 수정 가능");
+            return "redirect:/notice";
+        }
 
         NoticeEntity notice = this.readService.processNoticeRead(id);
+
+        if(!authService.getUsername().equals(notice.getStudentNumber())){
+            System.out.println("수정 실패: 작성자만 수정 가능");
+            return "redirect:/notice";
+        }
 
         ArticleDTO articleDTO = new ArticleDTO();
         articleDTO.setTitle(notice.getTitle());

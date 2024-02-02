@@ -4,6 +4,7 @@ import com.jbnucpu.www.dto.ArticleDTO;
 import com.jbnucpu.www.entity.ContentEntity;
 import com.jbnucpu.www.entity.NoticeEntity;
 import com.jbnucpu.www.repository.ContentRepository;
+import com.jbnucpu.www.service.AuthService;
 import com.jbnucpu.www.service.DeleteService;
 import com.jbnucpu.www.service.ReadService;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,8 @@ public class ContentController {
 
     private final DeleteService deleteService;
 
+    private final AuthService authService;
+
     @GetMapping("/content")
     public String content(Model model){
         List<ContentEntity> contentEntityList = this.contentRepository.findAll();
@@ -42,7 +45,17 @@ public class ContentController {
     @GetMapping("/content/update/{id}")
     public String updateContent(Model model, @PathVariable("id") Long id) {
 
+        if(!authService.isAuthenticated()){
+            System.out.println("수정 실패: 로그인 한 사용자만 수정 가능");
+            return "redirect:/content";
+        }
+
         ContentEntity content = this.readService.processContentRead(id);
+
+        if(!authService.getUsername().equals(content.getStudentNumber())){
+            System.out.println("수정 실패: 작성자만 수정 가능");
+            return "redirect:/content";
+        }
 
         ArticleDTO articleDTO = new ArticleDTO();
         articleDTO.setTitle(content.getTitle());
