@@ -4,8 +4,12 @@ package com.jbnucpu.www.dto;
 
 import com.jbnucpu.www.entity.ContentEntity;
 import com.jbnucpu.www.entity.NoticeEntity;
+import com.jbnucpu.www.entity.UserEntity;
+import com.jbnucpu.www.repository.UserRepository;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 @Getter
 @Setter
@@ -18,8 +22,6 @@ public class ArticleDTO {
     public ContentEntity toContentEntity(){
 
         ContentEntity contentEntity = new ContentEntity();
-        
-        contentEntity.setName("홍길동");
 
         contentEntity.setTitle(title);
 
@@ -31,8 +33,6 @@ public class ArticleDTO {
     public NoticeEntity toNoticeEntity(){
 
         NoticeEntity noticeEntity = new NoticeEntity();
-        
-        noticeEntity.setName("임꺽정");
 
         noticeEntity.setTitle(title);
 

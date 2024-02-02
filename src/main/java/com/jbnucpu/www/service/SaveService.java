@@ -3,10 +3,15 @@ package com.jbnucpu.www.service;
 import com.jbnucpu.www.dto.ArticleDTO;
 import com.jbnucpu.www.entity.ContentEntity;
 import com.jbnucpu.www.entity.NoticeEntity;
+import com.jbnucpu.www.entity.UserEntity;
 import com.jbnucpu.www.repository.ContentRepository;
 import com.jbnucpu.www.repository.NoticeRepository;
+import com.jbnucpu.www.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+@RequiredArgsConstructor
 @Service
 public class SaveService {
 
@@ -14,10 +19,9 @@ public class SaveService {
 
     private final ContentRepository contentRepository;
 
-    public SaveService(NoticeRepository noticeRepository, ContentRepository contentRepository){
-        this.noticeRepository = noticeRepository;
-        this.contentRepository = contentRepository;
-    }
+    private final UserRepository userRepository;
+
+    private final AuthService authService;
 
     //공지사항 저장
     public Boolean processNoticeSave(ArticleDTO articleDTO){
@@ -45,6 +49,12 @@ public class SaveService {
 
         NoticeEntity noticeEntity = articleDTO.toNoticeEntity();
 
+        String loginStudentNumber = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        UserEntity loginUser = userRepository.findByStudentnumber(loginStudentNumber);
+
+        noticeEntity.setName(loginUser.getName());
+
         noticeRepository.save(noticeEntity);
 
         return true;
@@ -56,6 +66,11 @@ public class SaveService {
         String title = articleDTO.getTitle();
         String content = articleDTO.getContent();
 
+        if(!authService.isAuthenticated()){
+            System.out.println("저장 실패: 로그인 한 사용자만 저장가능");
+            return false;
+        }
+        
         // 제목 유효한지
         if(title == null){
             return false;
@@ -76,6 +91,12 @@ public class SaveService {
 
         ContentEntity contentEntity = articleDTO.toContentEntity();
 
+        String loginStudentNumber = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        UserEntity loginUser = userRepository.findByStudentnumber(loginStudentNumber);
+
+        contentEntity.setName(loginUser.getName());
+        
         contentRepository.save(contentEntity);
 
         return true;
