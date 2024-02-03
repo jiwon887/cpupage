@@ -47,7 +47,12 @@ public class SecurityConfig {
         //http basic 방식 인증 disable
         http
                 .httpBasic((basic) -> basic.disable());
-
+        http
+                .logout(logout -> {
+                    logout
+                            .logoutUrl("/logout")
+                            .logoutSuccessUrl("/"); // 로그아웃 성공 후 리다이렉트 URL 지정
+                });
         http
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/signup", "/signinProc", "/signin").permitAll()

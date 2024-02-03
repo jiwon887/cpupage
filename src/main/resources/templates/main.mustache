@@ -8,6 +8,12 @@
 </head>
 <body>
     <h1>메인화면</h1>
+    <p style="color:blue; font-size: 18px;">로그인 한 사용자:{{roginUserName}}</p>
+    {{#activateLogoutButton}}
+        <form action="/logout" method="get">
+            <input type="submit" class="btn btn-primary" id="btn-logout" value="로그아웃">
+        </form>
+    {{/activateLogoutButton}}
     <a href="/signin">로그인 페이지</a> <br>
     <a href="/signup">회원가입 페이지</a> <br>
     <a href="/study/open">스터디 신청 페이지</a> <br>
