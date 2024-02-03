@@ -23,7 +23,8 @@
     <input id="studentnumber" type="text" name="studentnumber" placeholder="학번"><br>
     <button type="button" onclick="checkStudentNumber()">중복 확인</button>
     <div id="studentnumber-response"></div>
-    <input id="password" type="password" name="password" placeholder="비밀번호"><br>
+    <input id="password" type="password" name="password" placeholder="비밀번호" required><br>
+    <input id="confirm_password" type="password" name="confirm_password" placeholder="비밀번호 확인" required><br>
     <input id="college" type="text" name="college" placeholder="단과대학"><br>
     <input id="department" type="text" name="department" placeholder="학과"><br>
     <input id="isregistered" type="checkbox" name="isregistered" checked>
@@ -33,6 +34,20 @@
     <input type="submit" value="가입">
 </form>
 <script>
+
+    function checkPasswords() {
+        var password = document.getElementById('password').value;
+        var confirmPassword = document.getElementById('confirm_password').value;
+
+        // 비밀번호가 일치하지 않으면 사용자에게 알림
+        if (password !== confirmPassword) {
+            alert('입력한 두 비밀번호가 일치하지 않습니다.');
+            return false; // 폼 제출을 막음
+        }
+
+        return true; // 폼 제출 계속
+    }
+
     function checkStudentNumber() {
         const studentNumberInput = document.querySelector("#studentnumber");
         const studentNumber = studentNumberInput.value;
@@ -63,6 +78,10 @@
                     responseElement.innerHTML = '<p class="error-message">에러가 발생했습니다. 다시 시도해주세요.</p>';
                 });
     }
+
+    document.getElementById('signUpForm').onsubmit = function() {
+        return checkPasswords();
+    };
 </script>
 </body>
 </html>
