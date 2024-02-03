@@ -27,18 +27,15 @@
         </form>
     </div>
 <script>
-    const xmlhttp = new XMLHttpRequestUpload();
+    const xmlhttp = new XMLHttpRequest();
     function CheckBtn(){
         const studentnumber = document.querySelector("#studentnumber");
-
-        var data = "{'studentnumber':'202219900'}";
-        // const reqJson = new Object();
-        //.studentnumber = studentnumber.value;
-
+        const reqJson = new Object();
+        reqJson.studentnumber = studentnumber.value;
         // const xmlhttp = new XMLHttpRequestUpload();
         xmlhttp.open('POST', '/check/id',true);
         xmlhttp.setRequestHeader('Content-Type','application/json');
-        xmlhttp.send();
+        xmlhttp.send(JSON.stringify(reqJson));
     }
 
     xmlhttp.onreadystatechange = () => {
