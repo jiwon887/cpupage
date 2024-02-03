@@ -54,7 +54,7 @@ public class SecurityConfig {
                         .requestMatchers("/admin").hasAnyRole("ADMIN")
                         .anyRequest().permitAll()
                 );
-
+        //
         http
                 .formLogin((login) -> login
                         .loginPage("/signin")
@@ -70,6 +70,10 @@ public class SecurityConfig {
         http
             .sessionManagement((auth) -> auth
                     .sessionFixation().changeSessionId());
+
+        //로그아웃 uri 변경
+        http
+                .logout((logout) -> logout.logoutUrl("/logout/bye/cutie/my/darling"));
 
         return http.build();
     }
