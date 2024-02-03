@@ -53,9 +53,7 @@ public class SaveService {
 
         UserEntity loginUser = userRepository.findByStudentnumber(loginStudentNumber);
 
-        noticeEntity.setStudentNumber(loginStudentNumber);
-
-        noticeEntity.setName(loginUser.getName());
+        noticeEntity.setUserEntity(loginUser);
 
         noticeRepository.save(noticeEntity);
 

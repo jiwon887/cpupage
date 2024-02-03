@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -18,6 +19,9 @@ public class ReadService {
 
     private final ContentRepository contentRepository;
 
+    public List<NoticeEntity> processNoticeListRead() {
+        return this.noticeRepository.findAll();
+    }
     public NoticeEntity processNoticeRead(Long id) {
         Optional<NoticeEntity> notice = this.noticeRepository.findById(id);
         if (notice.isPresent()) {

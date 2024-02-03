@@ -30,7 +30,7 @@ public class NoticeController {
 
     @GetMapping("/notice")
     public String notice(Model model) {
-        List<NoticeEntity> noticeEntityList = this.noticeRepository.findAll();
+        List<NoticeEntity> noticeEntityList = readService.processNoticeListRead();
         model.addAttribute("noticeList", noticeEntityList);
         return "notice";
     }
@@ -52,7 +52,7 @@ public class NoticeController {
 
         NoticeEntity notice = this.readService.processNoticeRead(id);
 
-        if(!authService.getUsername().equals(notice.getStudentNumber())){
+        if(!authService.getUsername().equals(notice.getUserEntity().getStudentnumber())){
             System.out.println("수정 실패: 작성자만 수정 가능");
             return "redirect:/notice";
         }

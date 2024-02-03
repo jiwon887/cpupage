@@ -15,11 +15,7 @@ public class NoticeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String studentNumber;
-
-    private String name;
-
+    
     private String title;
 
     private String content;
