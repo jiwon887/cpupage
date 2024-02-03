@@ -67,18 +67,19 @@
         })
                 .then(response => response.json())
                 .then(data => {
-                    if (data.available) {
+                    if (data) { // `data`는 직접적으로 true 또는 false 값을 가집니다.
                         responseElement.innerHTML = '<p class="response-message">사용할 수 있는 학번입니다.</p>';
                     } else {
                         responseElement.innerHTML = '<p class="error-message">이미 사용 중인 학번입니다.</p>';
                     }
                 })
+
+
                 .catch(error => {
                     console.error('Error:', error);
                     responseElement.innerHTML = '<p class="error-message">에러가 발생했습니다. 다시 시도해주세요.</p>';
                 });
     }
-
     document.getElementById('signUpForm').onsubmit = function() {
         return checkPasswords();
     };
