@@ -34,54 +34,85 @@
     <input type="submit" value="가입">
 </form>
 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var isStudentNumberValid = false; // 학번 중복 검사의 유효성을 추적하는 변수
 
-    function checkPasswords() {
-        var password = document.getElementById('password').value;
-        var confirmPassword = document.getElementById('confirm_password').value;
+        function checkPasswords() {
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirm_password').value;
 
-        // 비밀번호가 일치하지 않으면 사용자에게 알림
-        if (password !== confirmPassword) {
-            alert('입력한 두 비밀번호가 일치하지 않습니다.');
-            return false; // 폼 제출을 막음
+            if (password !== confirmPassword) {
+                alert('입력한 두 비밀번호가 일치하지 않습니다.');
+                return false;
+            }
+            return true;
         }
 
-        return true; // 폼 제출 계속
-    }
-
-    function checkStudentNumber() {
-        const studentNumberInput = document.querySelector("#studentnumber");
-        const studentNumber = studentNumberInput.value;
-        const responseElement = document.querySelector("#studentnumber-response");
-
-        if (!studentNumber) {
-            responseElement.innerHTML = '<p class="error-message">학번을 입력해주세요.</p>';
-            return;
+        function validateStudentNumberFormat(studentNumber) {
+            return /^\d{9}$/.test(studentNumber);
         }
 
-        fetch('/check/id', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ studentnumber: studentNumber })
-        })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.available) {
-                        responseElement.innerHTML = '<p class="response-message">사용할 수 있는 학번입니다.</p>';
-                    } else {
-                        responseElement.innerHTML = '<p class="error-message">이미 사용 중인 학번입니다.</p>';
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    responseElement.innerHTML = '<p class="error-message">에러가 발생했습니다. 다시 시도해주세요.</p>';
-                });
-    }
+        function validatePhoneNumberFormat(phoneNumber) {
+            // 11자리 숫자 또는 010-xxxx-xxxx 형태 검증
+            return /^\d{11}$/.test(phoneNumber) || /^010-\d{4}-\d{4}$/.test(phoneNumber);
+        }
 
-    document.getElementById('signUpForm').onsubmit = function() {
-        return checkPasswords();
-    };
+        function checkStudentNumber() {
+            const studentNumberInput = document.querySelector("#studentnumber");
+            const studentNumber = studentNumberInput.value;
+            const responseElement = document.querySelector("#studentnumber-response");
+
+            if (!validateStudentNumberFormat(studentNumber)) {
+                responseElement.innerHTML = '<p class="error-message">학번은 9자리 숫자여야 합니다.</p>';
+                isStudentNumberValid = false;
+                return;
+            }
+
+            fetch('/check/id', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ studentnumber: studentNumber })
+            })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data) {
+                            isStudentNumberValid = true;
+                            responseElement.innerHTML = '<p class="response-message">사용할 수 있는 학번입니다.</p>';
+                        } else {
+                            isStudentNumberValid = false;
+                            responseElement.innerHTML = '<p class="error-message">이미 사용 중인 학번입니다.</p>';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        responseElement.innerHTML = '<p class="error-message">에러가 발생했습니다. 다시 시도해주세요.</p>';
+                        isStudentNumberValid = false;
+                    });
+        }
+
+        function validateForm() {
+            var phoneNumber = document.getElementById('phonenumber').value;
+
+            if (!checkPasswords() || !isStudentNumberValid || !validatePhoneNumberFormat(phoneNumber)) {
+                alert('폼 검증에 실패했습니다. 모든 조건을 만족시켜주세요.');
+                if (!validatePhoneNumberFormat(phoneNumber)) {
+                    alert('전화번호 형식이 올바르지 않습니다. xxxxxxxxxxx 또는 010-xxxx-xxxx 형태로 입력해주세요.');
+                }
+                return false;
+            }
+            return true;
+        }
+
+        document.getElementById('signUpForm').onsubmit = function() {
+            return validateForm();
+        };
+
+        document.querySelector('button[onclick="checkStudentNumber()"]').addEventListener('click', checkStudentNumber);
+    });
+
 </script>
+
 </body>
 </html>
