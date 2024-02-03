@@ -3,6 +3,7 @@ package com.jbnucpu.www.service;
 import com.jbnucpu.www.dto.CustomUserDetails;
 import com.jbnucpu.www.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,14 +20,14 @@ public class CheckService {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    public boolean checkId(String studentNumber) {
-
-        if (!userRepository.existsByStudentnumber(studentNumber)) {
+    public ResponseEntity<Boolean> checkId(String studentNumber) {
+        //System.out.println(studentNumber.);
+        if (userRepository.existsByStudentnumber(studentNumber)) {
             System.out.println("통과!");
-            return true;
+            return ResponseEntity.ok(true);
         } else {
             System.out.println("이미 가입된 학번이에용");
-            return false;
+            return ResponseEntity.ok(false);
         }
     }
 

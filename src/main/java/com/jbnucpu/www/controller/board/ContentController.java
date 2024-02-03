@@ -52,7 +52,7 @@ public class ContentController {
 
         ContentEntity content = this.readService.processContentRead(id);
 
-        if(!authService.getUsername().equals(content.getStudentNumber())){
+        if(!authService.getUsername().equals(content.getUserEntity().getStudentnumber())){
             System.out.println("수정 실패: 작성자만 수정 가능");
             return "redirect:/content";
         }

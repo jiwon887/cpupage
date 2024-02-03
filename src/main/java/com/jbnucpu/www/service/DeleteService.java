@@ -25,9 +25,9 @@ public class DeleteService {
             System.out.println("삭제 실패: 로그인 한 사용자만 삭제 가능");
             return false;
         }
-        // 작성자만 삭제 가능
+
         NoticeEntity noticeEntity = noticeRepository.findById(id).orElseThrow(()->new NoSuchElementException("해당 id에 대한 게시글을 찾을 수 없습니다"));
-        if(!authService.getUsername().equals(noticeEntity.getStudentNumber())){
+        if(!authService.getUsername().equals(noticeEntity.getUserEntity().getStudentnumber())){
             System.out.println("삭제 실패: 작성자만 삭제 가능");
             return false;
         }
@@ -45,7 +45,7 @@ public class DeleteService {
         }
         // 작성자만 삭제 가능
         ContentEntity contentEntity = contentRepository.findById(id).orElseThrow(()->new NoSuchElementException("해당 id에 대한 게시글을 찾을 수 없습니다"));
-        if(!authService.getUsername().equals(contentEntity.getStudentNumber())){
+        if(!authService.getUsername().equals(contentEntity.getUserEntity().getStudentnumber())){
             System.out.println("삭제 실패: 작성자만 삭제 가능");
             return false;
         }

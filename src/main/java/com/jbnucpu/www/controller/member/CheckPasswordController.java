@@ -11,11 +11,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 // 회원정보 수정 이전에 비밀번호로 인증하는 페이지
 @Controller
-public class CheckController {
+public class CheckPasswordController {
 
     @Autowired
     private CheckService checkService;
 
+<<<<<<< HEAD:src/main/java/com/jbnucpu/www/controller/member/CheckController.java
     // 아이디 체크 요청
     @PostMapping("/check/id")
     public Boolean checkIdPage(@RequestBody String studentnumber){
@@ -23,6 +24,8 @@ public class CheckController {
         return checkService.checkId(studentnumber);
     }
 
+=======
+>>>>>>> acd23b14071c6a8a23a6602bfa76fcc86377453c:src/main/java/com/jbnucpu/www/controller/member/CheckPasswordController.java
     // 비밀번호 체크 페이지
     @GetMapping("/check")
     public String checkPasswordPage(){
