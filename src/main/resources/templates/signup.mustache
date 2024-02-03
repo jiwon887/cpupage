@@ -41,17 +41,20 @@
             var password = document.getElementById('password').value;
             var confirmPassword = document.getElementById('confirm_password').value;
 
-            // 비밀번호가 일치하지 않으면 사용자에게 알림
             if (password !== confirmPassword) {
                 alert('입력한 두 비밀번호가 일치하지 않습니다.');
-                return false; // 폼 제출을 막음
+                return false;
             }
-
-            return true; // 폼 제출 계속
+            return true;
         }
 
         function validateStudentNumberFormat(studentNumber) {
-            return /^\d{9}$/.test(studentNumber); // 정확히 9자리 숫자인지 검사
+            return /^\d{9}$/.test(studentNumber);
+        }
+
+        function validatePhoneNumberFormat(phoneNumber) {
+            // 11자리 숫자 또는 010-xxxx-xxxx 형태 검증
+            return /^\d{11}$/.test(phoneNumber) || /^010-\d{4}-\d{4}$/.test(phoneNumber);
         }
 
         function checkStudentNumber() {
@@ -59,14 +62,12 @@
             const studentNumber = studentNumberInput.value;
             const responseElement = document.querySelector("#studentnumber-response");
 
-            // 학번 형식 검사
             if (!validateStudentNumberFormat(studentNumber)) {
                 responseElement.innerHTML = '<p class="error-message">학번은 9자리 숫자여야 합니다.</p>';
                 isStudentNumberValid = false;
                 return;
             }
 
-            // 학번 중복 검사 요청
             fetch('/check/id', {
                 method: 'POST',
                 headers: {
@@ -77,10 +78,10 @@
                     .then(response => response.json())
                     .then(data => {
                         if (data) {
-                            isStudentNumberValid = true; // 학번 사용 가능
+                            isStudentNumberValid = true;
                             responseElement.innerHTML = '<p class="response-message">사용할 수 있는 학번입니다.</p>';
                         } else {
-                            isStudentNumberValid = false; // 학번 사용 불가
+                            isStudentNumberValid = false;
                             responseElement.innerHTML = '<p class="error-message">이미 사용 중인 학번입니다.</p>';
                         }
                     })
@@ -92,8 +93,13 @@
         }
 
         function validateForm() {
-            if (!checkPasswords() || !isStudentNumberValid) {
+            var phoneNumber = document.getElementById('phonenumber').value;
+
+            if (!checkPasswords() || !isStudentNumberValid || !validatePhoneNumberFormat(phoneNumber)) {
                 alert('폼 검증에 실패했습니다. 모든 조건을 만족시켜주세요.');
+                if (!validatePhoneNumberFormat(phoneNumber)) {
+                    alert('전화번호 형식이 올바르지 않습니다. xxxxxxxxxxx 또는 010-xxxx-xxxx 형태로 입력해주세요.');
+                }
                 return false;
             }
             return true;
@@ -105,6 +111,7 @@
 
         document.querySelector('button[onclick="checkStudentNumber()"]').addEventListener('click', checkStudentNumber);
     });
+
 </script>
 
 </body>
