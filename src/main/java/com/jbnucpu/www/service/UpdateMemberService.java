@@ -12,8 +12,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class UpdateMemberService {
+
+    static public class ExistNickNameError extends RuntimeException {
+
+        public ExistNickNameError(String message) {
+            super(message);
+        }
+    }
 
     @Autowired
     UserRepository userRepository;
@@ -41,6 +49,10 @@ public class UpdateMemberService {
             user.setPhonenumber(newPhoneNumber);
         }
         if (newNickName != null) {
+            //닉네임 중복 검사
+            if(userRepository.existsByNickname(newNickName)){
+                throw new ExistNickNameError("이미 사용 중인 닉네임입니다. 창의력을 발휘하세요.");
+            }
             user.setNickname(newNickName);
         }
 
