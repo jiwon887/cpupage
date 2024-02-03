@@ -13,4 +13,6 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     Boolean existsByNickname(String nickname);
 
+    void deleteByStudentnumber(String studentnumber);
+
 }

@@ -59,7 +59,7 @@ public class SecurityConfig {
                         .requestMatchers("/admin").hasAnyRole("ADMIN")
                         .anyRequest().permitAll()
                 );
-
+        //
         http
                 .formLogin((login) -> login
                         .loginPage("/signin")
@@ -75,6 +75,7 @@ public class SecurityConfig {
         http
             .sessionManagement((auth) -> auth
                     .sessionFixation().changeSessionId());
+
 
         return http.build();
     }

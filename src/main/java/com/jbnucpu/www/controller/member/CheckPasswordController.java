@@ -16,6 +16,16 @@ public class CheckPasswordController {
     @Autowired
     private CheckService checkService;
 
+<<<<<<< HEAD:src/main/java/com/jbnucpu/www/controller/member/CheckController.java
+    // 아이디 체크 요청
+    @PostMapping("/check/id")
+    public Boolean checkIdPage(@RequestBody String studentnumber){
+
+        return checkService.checkId(studentnumber);
+    }
+
+=======
+>>>>>>> acd23b14071c6a8a23a6602bfa76fcc86377453c:src/main/java/com/jbnucpu/www/controller/member/CheckPasswordController.java
     // 비밀번호 체크 페이지
     @GetMapping("/check")
     public String checkPasswordPage(){
@@ -33,7 +43,7 @@ public class CheckPasswordController {
 
             if(passwordCorrect){
                 System.out.println("비밀번호 체크 성공");
-                return "main";
+                return "updatemember";
             }
             else{
                 System.out.println("비밀번호 틀렸는디?");
