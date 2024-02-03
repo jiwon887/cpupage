@@ -20,27 +20,31 @@ public class MainController {
 
     @GetMapping("/")
     public String mainPage(Model model){
+
         //현재 로그인한 사용자, 로그인 버튼 - 준혁
         if(authService.isAuthenticated()){
             model.addAttribute("roginUserName",authService.getUsername());
             model.addAttribute("activateLogoutButton",true);
-        }else{
+        }
+        else{
             model.addAttribute("roginUserName","로그인하지 않음");
             model.addAttribute("activateLogoutButton",false);
         }
 
         // 테스트 때문에 썼습니다 나중에 지우겠습니다 - 도현
         if(authService.isAuthenticated()){
-
             System.out.println(SecurityContextHolder.getContext().getAuthentication().getName());
 
             String studentNumber = SecurityContextHolder.getContext().getAuthentication().getName();
 
+
             UserEntity loginUser = userRepository.findByStudentnumber(studentNumber);
+            if(loginUser !=null) {
+                System.out.println(loginUser.getName());
 
-            System.out.println(loginUser.getName());
-
-            return "main";
+                return "main";
+            }
+            else return "main";
         }
 
 

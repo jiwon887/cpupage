@@ -76,9 +76,6 @@ public class SecurityConfig {
             .sessionManagement((auth) -> auth
                     .sessionFixation().changeSessionId());
 
-        //로그아웃 uri 변경
-        http
-                .logout((logout) -> logout.logoutUrl("/logout/bye/cutie/my/darling"));
 
         return http.build();
     }

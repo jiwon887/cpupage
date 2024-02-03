@@ -20,12 +20,7 @@ public class CheckController {
     @PostMapping("/check/id")
     public Boolean checkIdPage(@RequestBody String studentnumber){
 
-        boolean idCorrect = checkService.checkPassword(studentnumber);
-
-        System.out.println("idCorrect값은?");
-        System.out.println(idCorrect);
-
-        return idCorrect;
+        return checkService.checkId(studentnumber);
     }
 
     // 비밀번호 체크 페이지
@@ -45,7 +40,7 @@ public class CheckController {
 
             if(passwordCorrect){
                 System.out.println("비밀번호 체크 성공");
-                return "main";
+                return "updatemember";
             }
             else{
                 System.out.println("비밀번호 틀렸는디?");
