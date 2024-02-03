@@ -188,4 +188,6 @@ public class StudyService {
         this.studyEnrollRepository.delete(userOptional.get());
         return true;
     }
+
+
 }
