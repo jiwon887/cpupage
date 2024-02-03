@@ -8,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Timestamp;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -49,10 +50,7 @@ public class UserEntity {
     @OneToMany(mappedBy = "userEntity",cascade = CascadeType.ALL)
     private Set<StudyEnrollEntity> studyEnrollEntities = new HashSet<StudyEnrollEntity>();
 
-    public void addStudy(StudyEnrollEntity studyEnrollEntity) {
-
-        studyEnrollEntity.setUserEntity(this);
-        this.studyEnrollEntities.add(studyEnrollEntity);
-    }
+    @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL)
+    private List<NoticeEntity> noticeEntities;
 
 }
