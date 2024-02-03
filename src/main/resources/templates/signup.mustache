@@ -14,7 +14,7 @@
             <input id="name" type="text" name="name" placeholder="name"/><br>
             <input id="studentnumber" type="text" name="studentnumber" placeholder="student number"/><br>
             <div class="POST"> <!--기준-->
-                <input type="submit" value="중복 확인">
+                <input onclick="CheckBtn()" type="button" value="중복 확인">
             </div>
             <input id="password" type="password" name="password" placeholder="password"/><br>
             <input id="college" type="text" name="college" placeholder="college"/> <br>
@@ -27,29 +27,31 @@
         </form>
     </div>
 <script>
-    isChckBtn.addEventListener('click', () => {
+    const xmlhttp = new XMLHttpRequestUpload();
+    function CheckBtn(){
         const studentnumber = document.querySelector("#studentnumber");
 
-        const reqJson = new Object();
-        reqJson.studentnumber = studentnumber.value;
+        var data = "{'studentnumber':'202219900'}";
+        // const reqJson = new Object();
+        //.studentnumber = studentnumber.value;
 
-        const xmlhttp = new XMLHttpRequestUpload();
-        xmlhttp.open('POST', 'http://localhost:8080/check/id',true);
+        // const xmlhttp = new XMLHttpRequestUpload();
+        xmlhttp.open('POST', '/check/id',true);
         xmlhttp.setRequestHeader('Content-Type','application/json');
-        xmlhttp.send(JSON.stringify(reqJson));
-    })
+        xmlhttp.send();
+    }
 
     xmlhttp.onreadystatechange = () => {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
             if(xmlhttp.response == 'true') {
                 window.addEventListener('load',function () {
                     let parent = document.querySelector(".POST");
-                    parent.insertAdjacentHTML('afterbegin',"사용할 수 있는 학번입니다.")
+                    parent.insertAdjacentHTML('afterbegin',"<p>사용할 수 있는 학번입니다.</p>")
                 })
             }else{
                 window.addEventListener('load', function () {
                     let parent = document.querySelector(".POST");
-                    parent.insertAdjacentHTML('afterbegin',"사용할 수 있는 학번입니다.")
+                    parent.insertAdjacentHTML('afterbegin',"<p>사용할 수 있는 학번입니다.</p>")
                 })
             }
         } else {
