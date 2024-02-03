@@ -1,5 +1,6 @@
 package com.jbnucpu.www.controller.member;
 
+import com.jbnucpu.www.dto.StudentNumberDTO;
 import com.jbnucpu.www.service.CheckService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +15,11 @@ public class CheckIdController {
     private final CheckService checkService;
 
     @PostMapping("/check/id")
-    public ResponseEntity<Boolean> checkIdPage(@RequestBody String studentnumber){
+    public ResponseEntity<Boolean> checkIdPage(@RequestBody StudentNumberDTO studentnumberDTO){
 
-        return checkService.checkId(studentnumber);
+        String studentNumber = studentnumberDTO.getStudentnumber();
+
+        return checkService.checkId(studentNumber);
     }
 
 }

@@ -20,9 +20,10 @@ public class CheckService {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
+    // 학번 중복 테스트
     public ResponseEntity<Boolean> checkId(String studentNumber) {
-        //System.out.println(studentNumber.);
-        if (userRepository.existsByStudentnumber(studentNumber)) {
+        System.out.println(studentNumber);
+        if (!userRepository.existsByStudentnumber(studentNumber)) {
             System.out.println("통과!");
             return ResponseEntity.ok(true);
         } else {
@@ -31,6 +32,7 @@ public class CheckService {
         }
     }
 
+    // 비밀번호 테스트
     public boolean checkPassword(String enteredPassword) {
 
         try{
