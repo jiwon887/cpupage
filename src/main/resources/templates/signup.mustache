@@ -34,86 +34,77 @@
     <input type="submit" value="가입">
 </form>
 <script>
-    var isStudentNumberValid = false; // 학번 중복 검사의 유효성을 추적하는 변수
+    document.addEventListener('DOMContentLoaded', function() {
+        var isStudentNumberValid = false; // 학번 중복 검사의 유효성을 추적하는 변수
 
-    function checkPasswords() {
-        var password = document.getElementById('password').value;
-        var confirmPassword = document.getElementById('confirm_password').value;
+        function checkPasswords() {
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirm_password').value;
 
-        // 비밀번호가 일치하지 않으면 사용자에게 알림
-        if (password !== confirmPassword) {
-            alert('입력한 두 비밀번호가 일치하지 않습니다.');
-            return false; // 폼 제출을 막음
-        }
-
-        return true; // 폼 제출 계속
-    }
-
-    function checkStudentNumber() {
-        const studentNumberInput = document.querySelector("#studentnumber");
-        const studentNumber = studentNumberInput.value;
-        const responseElement = document.querySelector("#studentnumber-response");
-
-        if (!studentNumber) {
-            responseElement.innerHTML = '<p class="error-message">학번을 입력해주세요.</p>';
-            isStudentNumberValid = false; // 학번 검사 실패
-            return;
-        }
-
-        fetch('/check/id', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ studentnumber: studentNumber })
-        })
-                .then(response => response.json())
-                .then(data => {
-                    if (data) {
-                        isStudentNumberValid = true; // 학번 사용 가능
-                        responseElement.innerHTML = '<p class="response-message">사용할 수 있는 학번입니다.</p>';
-                    } else {
-                        isStudentNumberValid = false; // 학번 사용 불가
-                        responseElement.innerHTML = '<p class="error-message">이미 사용 중인 학번입니다.</p>';
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    responseElement.innerHTML = '<p class="error-message">에러가 발생했습니다. 다시 시도해주세요.</p>';
-                    isStudentNumberValid = false; // 에러 발생 시
-                });
-    }
-
-    function validateForm() {
-        // 모든 필드가 입력되었는지 확인
-        var name = document.getElementById('name').value;
-        var studentNumber = document.getElementById('studentnumber').value;
-        var password = document.getElementById('password').value;
-        var confirmPassword = document.getElementById('confirm_password').value;
-        var college = document.getElementById('college').value;
-        var department = document.getElementById('department').value;
-        var grade = document.getElementById('grade').value;
-        var phoneNumber = document.getElementById('phonenumber').value;
-
-        if (!name || !studentNumber || !password || !confirmPassword || !college || !department || !grade || !phoneNumber) {
-            alert('모든 필드를 입력해주세요.');
-            return false;
-        }
-
-        // 비밀번호 일치 및 학번 중복 검사 확인
-        if (!checkPasswords() || !isStudentNumberValid) {
-            if (!isStudentNumberValid) {
-                alert('학번 중복 검사를 완료해주세요.');
+            // 비밀번호가 일치하지 않으면 사용자에게 알림
+            if (password !== confirmPassword) {
+                alert('입력한 두 비밀번호가 일치하지 않습니다.');
+                return false; // 폼 제출을 막음
             }
-            return false;
+
+            return true; // 폼 제출 계속
         }
 
-        return true; // 모든 검사 통과
-    }
+        function validateStudentNumberFormat(studentNumber) {
+            return /^\d{9}$/.test(studentNumber); // 정확히 9자리 숫자인지 검사
+        }
 
-    document.getElementById('signUpForm').onsubmit = function() {
-        return validateForm(); // 폼 제출 전 유효성 검사 실행
-    };
+        function checkStudentNumber() {
+            const studentNumberInput = document.querySelector("#studentnumber");
+            const studentNumber = studentNumberInput.value;
+            const responseElement = document.querySelector("#studentnumber-response");
+
+            // 학번 형식 검사
+            if (!validateStudentNumberFormat(studentNumber)) {
+                responseElement.innerHTML = '<p class="error-message">학번은 9자리 숫자여야 합니다.</p>';
+                isStudentNumberValid = false;
+                return;
+            }
+
+            // 학번 중복 검사 요청
+            fetch('/check/id', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ studentnumber: studentNumber })
+            })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data) {
+                            isStudentNumberValid = true; // 학번 사용 가능
+                            responseElement.innerHTML = '<p class="response-message">사용할 수 있는 학번입니다.</p>';
+                        } else {
+                            isStudentNumberValid = false; // 학번 사용 불가
+                            responseElement.innerHTML = '<p class="error-message">이미 사용 중인 학번입니다.</p>';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        responseElement.innerHTML = '<p class="error-message">에러가 발생했습니다. 다시 시도해주세요.</p>';
+                        isStudentNumberValid = false;
+                    });
+        }
+
+        function validateForm() {
+            if (!checkPasswords() || !isStudentNumberValid) {
+                alert('폼 검증에 실패했습니다. 모든 조건을 만족시켜주세요.');
+                return false;
+            }
+            return true;
+        }
+
+        document.getElementById('signUpForm').onsubmit = function() {
+            return validateForm();
+        };
+
+        document.querySelector('button[onclick="checkStudentNumber()"]').addEventListener('click', checkStudentNumber);
+    });
 </script>
 
 </body>
