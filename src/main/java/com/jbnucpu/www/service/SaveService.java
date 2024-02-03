@@ -95,9 +95,7 @@ public class SaveService {
 
         UserEntity loginUser = userRepository.findByStudentnumber(loginStudentNumber);
 
-        contentEntity.setStudentNumber(loginStudentNumber);
-
-        contentEntity.setName(loginUser.getName());
+        contentEntity.setUserEntity(loginUser);
         
         contentRepository.save(contentEntity);
 

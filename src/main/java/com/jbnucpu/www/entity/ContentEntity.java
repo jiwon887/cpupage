@@ -1,11 +1,9 @@
 package com.jbnucpu.www.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.catalina.User;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -19,10 +17,6 @@ public class ContentEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String studentNumber;
-
-    private String name;
-
     private String title;
 
     private String content;
@@ -32,5 +26,8 @@ public class ContentEntity {
 
     @UpdateTimestamp
     private Timestamp updateDate;
+
+    @ManyToOne
+    private UserEntity userEntity;
 
 }
