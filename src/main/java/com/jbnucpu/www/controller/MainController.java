@@ -25,10 +25,12 @@ public class MainController {
         if(authService.isAuthenticated()){
             model.addAttribute("roginUserName",authService.getUsername());
             model.addAttribute("activateLogoutButton",true);
+            model.addAttribute("id", authService.getUserId());
         }
         else{
             model.addAttribute("roginUserName","로그인하지 않음");
             model.addAttribute("activateLogoutButton",false);
+            model.addAttribute("id", null);
         }
 
         // 테스트 때문에 썼습니다 나중에 지우겠습니다 - 도현
