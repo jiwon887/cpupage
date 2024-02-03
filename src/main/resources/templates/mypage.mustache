@@ -21,5 +21,12 @@
         {{/noticeList}}
     </div>
     <h2>내가 쓴 게시글</h2>
+    <div>
+        {{#contentList}}
+            <a href="/content/{{id}}"><strong>번호:</strong> {{id}}</a>
+            <strong>제목:</strong> {{title}}
+            <br>
+        {{/contentList}}
+    </div>
 </body>
 </html>

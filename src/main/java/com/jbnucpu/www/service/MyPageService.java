@@ -1,7 +1,9 @@
 package com.jbnucpu.www.service;
 
+import com.jbnucpu.www.entity.ContentEntity;
 import com.jbnucpu.www.entity.NoticeEntity;
 import com.jbnucpu.www.entity.UserEntity;
+import com.jbnucpu.www.repository.ContentRepository;
 import com.jbnucpu.www.repository.NoticeRepository;
 import com.jbnucpu.www.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,8 @@ public class MyPageService {
     private final AuthService authService;
 
     private final NoticeRepository noticeRepository;
+
+    private final ContentRepository contentRepository;
 
     //로그인 유저와 접속하려는 마이페이지와 일치하는 지 체크
     public Boolean checkUser(Long id){
@@ -60,6 +64,20 @@ public class MyPageService {
         if (!noticeList.isEmpty()) {
 
             return noticeList;
+        }
+        return null;
+    }
+
+    // 내가 쓴 자유글 불러오기
+    public List<ContentEntity> readUserContent(Long id) {
+
+        UserEntity user = this.readUser(id);
+        System.out.println(user.getCollege());
+        List<ContentEntity> contentList = contentRepository.findByUserEntityId(user.getId());
+        System.out.println(contentList);
+        if (!contentList.isEmpty()) {
+
+            return contentList;
         }
         return null;
     }
