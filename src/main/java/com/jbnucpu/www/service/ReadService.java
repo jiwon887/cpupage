@@ -6,6 +6,9 @@ import com.jbnucpu.www.repository.ContentRepository;
 import com.jbnucpu.www.repository.NoticeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,9 +22,16 @@ public class ReadService {
 
     private final ContentRepository contentRepository;
 
+    public Page<NoticeEntity> processNoticePageListRead(Pageable pageable) {
+
+        return this.noticeRepository.findAll(pageable);
+    }
+
     public List<NoticeEntity> processNoticeListRead() {
+
         return this.noticeRepository.findAll();
     }
+
     public NoticeEntity processNoticeRead(Long id) {
         Optional<NoticeEntity> notice = this.noticeRepository.findById(id);
         if (notice.isPresent()) {

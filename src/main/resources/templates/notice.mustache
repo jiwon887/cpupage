@@ -9,13 +9,33 @@
 <body>
     <h1>Notice Page</h1>
     <a href="editor/notice">공지사항 쓰기</a>
+    <hr>
     <div>
-        {{#noticeList}}
-            <a href="notice/{{id}}"><strong>번호:</strong> {{id}}</a>
+        <!--TODO: 게시물 번호 수정-->
+        {{#paging}}
+            <a href="notice/{id}}"><strong>번호:</strong> {{id}}</a>
             <strong>작성자:</strong> {{userEntity.name}}
             <strong>제목:</strong> {{title}}
             <br>
-        {{/noticeList}}
+        {{/paging}}
     </div>
+    <hr>
+    <ul>
+        {{#hasPrev}}
+            <li style="display: inline">
+                <a class="page-link" href="?page={{prev}}">Previous</a>
+            </li>
+        {{/hasPrev}}
+        {{#pageIndexArray}}
+            <li style="display: inline">
+                <a href="?page={{.}}">{{.}}</a>
+            </li>
+        {{/pageIndexArray}}
+        {{#hasNext}}
+            <li style="display: inline">
+                <a class="page-link" href="?page={{ next }}">Next</a>
+            </li>
+        {{/hasNext}}
+    </ul>
 </body>
 </html>
