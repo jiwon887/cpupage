@@ -64,13 +64,13 @@ public class StudyController {
 
     // 스터디 수정
     @GetMapping("/study/edit/{no}")
-    public String studyUpdateForm(@PathVariable("no")Long no, Model model){
+    public String studyEditForm(@PathVariable("no")Long no, Model model){
         model.addAttribute("studyEntity_data", studyService.findStudy(no));
         return "studyedit";
     }
 
     @PostMapping("/study/edit/{no}")
-    public String studyUpdate(@PathVariable("no")Long no,@Valid StudyDTO studyDTO){
+    public String studyEdit(@PathVariable("no")Long no, @Valid StudyDTO studyDTO){
         studyService.editStudy(studyDTO,no);//studyDTO로 no번째 엔티티를 수정
         return "redirect:/study/{no}";
     }

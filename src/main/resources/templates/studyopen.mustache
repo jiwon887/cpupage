@@ -1,68 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="css\layout-style.css">
+</head>
+<body>
 <h1>스터디 등록</h1>
-
-<div>
+{{#errorMessage}}
+    <p style="color: red;">{{errorMessage}}</p>
+{{/errorMessage}}
+<form action="/study/open" method="post" name="study">
     <div>
-        {{#errorMessage}}
-            <p style="color: red;">{{errorMessage}}</p>
-        {{/errorMessage}}
-        <form action="/study/open" method="post" name="study">
-            <div>
-                <label for="title">제목</label>
-                <input name="title" type="text" class="form-control" id="title" placeholder="제목을 입력하세요">
-            </div>
-            <!--<div>
-                <label for="title">학번</label>
-                <input name="studentNumber" type="text" class="form-control" id="title" placeholder="제목을 입력하세요">
-            </div>-->
-            <div>
-                <label for="title">이름</label>
-                <input name="name" type="text" class="form-control" id="title" placeholder="제목을 입력하세요">
-            </div>
-            <div>
-                <label for="title">학년</label>
-                <input name="grade" type="text" class="form-control" id="title" placeholder="제목을 입력하세요">
-            </div>
-            <div>
-                <label for="title">단과대학</label>
-                <input name="college" type="text" class="form-control" id="title" placeholder="제목을 입력하세요">
-            </div>
-            <div>
-                <label for="title">학과</label>
-                <input name="department" type="text" class="form-control" id="title" placeholder="제목을 입력하세요">
-            </div>
-            <div>
-                <label for="title">전화번호</label>
-                <input name="phoneNumber" type="text" class="form-control" id="title" placeholder="제목을 입력하세요">
-            </div>
-            <div>
-                <label for="content">스터디 주제</label>
-                <textarea name="studySubject" class="form-control" id="content" placeholder="내용을 입력하세요"></textarea>
-            </div>
-            <div>
-                <label for="content">스터디 목표</label>
-                <textarea name="studyGoal" class="form-control" id="content" placeholder="내용을 입력하세요"></textarea>
-            </div>
-            <div>
-                <label for="content">스터디 활동 방식</label>
-                <textarea name="studyMethod" class="form-control" id="content" placeholder="내용을 입력하세요"></textarea>
-            </div>
-            <div>
-                <label for="content">스터디 자료</label>
-                <textarea name="studyReference" class="form-control" id="content" placeholder="내용을 입력하세요"></textarea>
-            </div>
-            <div>
-                <label for="content">스터디 일시</label>
-                <textarea name="studyTime" class="form-control" id="content" placeholder="내용을 입력하세요"></textarea>
-            </div>
-            <div>
-                <label for="content">스터디 장소</label>
-                <textarea name="studyPlace" class="form-control" id="content" placeholder="내용을 입력하세요"></textarea>
-            </div>
-            <div>
-                <label for="content">스터디 관련 팀장 경험</label>
-                <textarea name="managerExperience" class="form-control" id="content" placeholder="내용을 입력하세요"></textarea>
-            </div>
-            <input type="submit" class="btn btn-primary" id="btn-save" value="등록">
-        </form>
+        <label for="studyType">스터디 유형</label>
+        <select name="studyType">
+            <option value="">유형선택</option>
+            <option value="BASIC">기본(BASIC)</option>
+            <option value="SELF">자율(SELF)</option>
+        </select>
     </div>
-</div>
+    <div>
+        <label for="title">스터디 이름</label>
+        <input name="title" type="text" class="form-control" id="title">
+    </div>
+    <div>
+        <label for="studySubject">스터디 주제</label>
+        <input name="studySubject" type="text" class="form-control" id="studySubject">
+    </div>
+    <div>
+        <label for="studyDetail">스터디 설명</label>
+        <input name="studyDetail" type="text" class="form-control" id="studyDetail" placeholder="스터디 활동방식\n스터디 자료\n스터디 시간\n스터디 장소" style="width:300px;height:200px;">
+    </div>
+    <input type="submit" class="btn btn-primary" id="btn-save" value="등록">
+</form>
+</body>
+</html>

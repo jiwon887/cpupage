@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="">
 <head>
     <meta charset="UTF-8">
@@ -5,6 +6,22 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
 {{studyEntity_data.title}}
@@ -13,44 +30,25 @@
         <thead>
         <tr>
             <th>id</th>
+            <th>accept</th>
+            <th>studyType</th>
             <th>title</th>
             <th>studentNumber</th>
-            <th>name</th>
-            <th>grade</th>
-            <th>college</th>
-            <th>department</th>
-            <th>phoneNumber</th>
             <th>studySubject</th>
-            <th>studyGoal</th>
-            <th>studyMethod</th>
-            <th>studyReference</th>
-            <th>studyTime</th>
-            <th>studyPlace</th>
-            <th>managerExperience</th>
+            <th>studyDetail</th>
             <th>createDate</th>
-            <th>updateDate</th>
         </tr>
         </thead>
         <tbody>
         <tr>
             <td>{{studyEntity_data.id}}</td>
+            <td>{{studyEntity_data.accept}}</td>
+            <td>{{studyEntity_data.studyType}}</td>
             <td>{{studyEntity_data.title}}</td>
             <td>{{studyEntity_data.studentNumber}}</td>
-            <td>{{studyEntity_data.name}}</td>
-            <td>{{studyEntity_data.grade}}</td>
-            <td>{{studyEntity_data.college}}</td>
-            <td>{{studyEntity_data.department}}</td>
-            <td>{{studyEntity_data.phoneNumber}}</td>
             <td>{{studyEntity_data.studySubject}}</td>
-            <td>{{studyEntity_data.studyGoal}}</td>
-            <td>{{studyEntity_data.studyMethod}}</td>
-            <td>{{studyEntity_data.studyReference}}</td>
-            <td>{{studyEntity_data.studyTime}}</td>
-            <td>{{studyEntity_data.studyPlace}}</td>
-            <td>{{studyEntity_data.managerExperience}}</td>
+            <td>{{studyEntity_data.studyDetail}}</td>
             <td>{{studyEntity_data.createDate}}</td>
-            <td>{{studyEntity_data.updateDate}}</td>
-
         </tr>
         </tbody>
     </table>

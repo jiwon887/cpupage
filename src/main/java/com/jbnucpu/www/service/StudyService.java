@@ -50,9 +50,9 @@ public class StudyService {
                 .orElseThrow(()->new NoSuchElementException("해당 id에 대한 스터디를 찾을 수 없습니다"));
     }
     /**
-     * 'studyopen.mustache' 로부터 학번을 제외한 DTO를 받아 저장,
-     *  빠진 학번은 authService.getUsername()로 따로 불러옴
-     *  이때 authService.getUsername()의 리턴값은 name이 아니라 studentnumber임
+     * 'studyopen.mustache' 로부터 학번,승인여부를 제외한 DTO를 받아 저장,
+     *  빠진 학번은 authService.getUserStudentnumber()로 따로 불러옴
+     *  승인여부 기본값은 false
      *
      * @param studyDTO 학번을 제외한 DTO객체
      * @return this.studyRepository.findAll()
@@ -62,8 +62,8 @@ public class StudyService {
             System.out.println("신청 실패: 로그인 한 사용자만 신청가능");
             return false;
         }
-        studyDTO.toEntity_ExceptStudentNumber();
-        studyDTO.setStudentNumber(authService.getUsername());
+        studyDTO.setStudentNumber(authService.getUserStudentnumber());
+        studyDTO.setAccept(false);
         StudyEntity studyEntity = studyDTO.toEntity();
         studyRepository.save(studyEntity);
         return true;
@@ -90,7 +90,7 @@ public class StudyService {
             return false;
         }
         StudyEntity studyEntity=findStudy(no);
-        if(!authService.getUsername().equals(studyEntity.getStudentNumber())){
+        if(!authService.getUserStudentnumber().equals(studyEntity.getStudentNumber())){
             System.out.println("삭제 실패: 스터디 개설자 본인만 삭제 가능");
             return false;
         }
@@ -106,19 +106,8 @@ public class StudyService {
      */
     public void editStudy(StudyDTO studyDTO,Long no){
         StudyEntity s=findStudy(no);
-        s.setTitle(studyDTO.getTitle());
-        s.setName(studyDTO.getName());
-        s.setGrade(studyDTO.getGrade());
-        s.setCollege(studyDTO.getCollege());
-        s.setDepartment(studyDTO.getDepartment());
-        s.setPhoneNumber(studyDTO.getPhoneNumber());
         s.setStudySubject(studyDTO.getStudySubject());
-        s.setStudyGoal(studyDTO.getStudyGoal());
-        s.setStudyMethod(studyDTO.getStudyMethod());
-        s.setStudyReference(studyDTO.getStudyReference());
-        s.setStudyTime(studyDTO.getStudyTime());
-        s.setStudyPlace(studyDTO.getStudyPlace());
-        s.setManagerExperience(studyDTO.getManagerExperience());
+        s.setStudyDetail(studyDTO.getStudyDetail());
         studyRepository.save(s);
     }
 
@@ -140,7 +129,7 @@ public class StudyService {
             return false;
         }
 
-        UserEntity userEntity_AvoidDuplicate = userRepository.findByStudentnumber(authService.getUsername());
+        UserEntity userEntity_AvoidDuplicate = userRepository.findByStudentnumber(authService.getUserStudentnumber());
         Optional<StudyEnrollEntity> userOptional = studyEnrollRepository.findByUserEntityId(userEntity_AvoidDuplicate.getId());
         if(userOptional.isPresent()){
             System.out.println("신청실패: 이미 신청된 사용자");
@@ -151,7 +140,7 @@ public class StudyService {
         //1.새로운 엔티티 생성
         StudyEnrollEntity enrollEntity = new StudyEnrollEntity();
         //2.enrollEntityEntity에 userEntity 맵핑
-        UserEntity userEntity = userRepository.findByStudentnumber(authService.getUsername());//주의 getUsername()해당메소드 학번반환함 이름 반환안함
+        UserEntity userEntity = userRepository.findByStudentnumber(authService.getUserStudentnumber());//주의 getUsername()해당메소드 학번반환함 이름 반환안함
         enrollEntity.setUserEntity(userEntity);
         //3.enrollEntityEntity에 studyEntity 맵핑
         enrollEntity.setStudyEntity(findStudy(no));
@@ -178,7 +167,7 @@ public class StudyService {
             System.out.println("탈퇴실패: 로그인 안 한 상태로 탈퇴");
             return false;
         }
-        UserEntity userEntity = userRepository.findByStudentnumber(authService.getUsername());
+        UserEntity userEntity = userRepository.findByStudentnumber(authService.getUserStudentnumber());
         Optional<StudyEnrollEntity> userOptional = studyEnrollRepository.findByUserEntityId(userEntity.getId());
         if(userOptional.isEmpty()){
             System.out.println("삭제실패: 삭제할 사용자를 찾을 수 없음");

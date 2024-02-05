@@ -1,6 +1,9 @@
 package com.jbnucpu.www.entity;
 
+import com.jbnucpu.www.dto.StudyDTO;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -19,33 +22,17 @@ public class StudyEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private boolean accept;
+
+    private String studyType;//BASIC(기본),SELF(자율)
+
     private String title;
 
-    private String studentNumber; // 작성자
-
-    private String name; // 팀장명
-
-    private String grade;
-
-    private String college;
-
-    private String department;
-
-    private String phoneNumber;
+    private String studentNumber;
 
     private String studySubject;
 
-    private String studyGoal;
-
-    private String studyMethod; // 스터디 활동 방식
-
-    private String studyReference; // 스터디 자료
-
-    private String studyTime;
-
-    private String studyPlace;
-
-    private String managerExperience;
+    private String studyDetail;
 
     @CreationTimestamp
     private Timestamp createDate;

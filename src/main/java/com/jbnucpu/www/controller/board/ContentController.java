@@ -2,7 +2,6 @@ package com.jbnucpu.www.controller.board;
 
 import com.jbnucpu.www.dto.ArticleDTO;
 import com.jbnucpu.www.entity.ContentEntity;
-import com.jbnucpu.www.entity.NoticeEntity;
 import com.jbnucpu.www.repository.ContentRepository;
 import com.jbnucpu.www.service.AuthService;
 import com.jbnucpu.www.service.DeleteService;
@@ -81,7 +80,7 @@ public class ContentController {
 
         ContentEntity content = this.readService.processContentRead(id);
 
-        if(!authService.getUsername().equals(content.getUserEntity().getStudentnumber())){
+        if(!authService.getUserStudentnumber().equals(content.getUserEntity().getStudentnumber())){
             System.out.println("수정 실패: 작성자만 수정 가능");
             return "redirect:/content";
         }

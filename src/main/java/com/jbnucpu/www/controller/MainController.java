@@ -1,6 +1,5 @@
 package com.jbnucpu.www.controller;
 
-import com.jbnucpu.www.dto.CustomUserDetails;
 import com.jbnucpu.www.entity.UserEntity;
 import com.jbnucpu.www.repository.UserRepository;
 import com.jbnucpu.www.service.AuthService;
@@ -25,7 +24,7 @@ public class MainController {
 
         //현재 로그인한 사용자, 로그인 버튼 - 준혁
         if(authService.isAuthenticated()){
-            model.addAttribute("roginUserName",authService.getUsername());
+            model.addAttribute("roginUserName",authService.getUserStudentnumber());
             model.addAttribute("activateLogoutButton",true);
             model.addAttribute("id", authService.getUserId());
         }

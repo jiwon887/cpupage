@@ -7,7 +7,6 @@ import com.jbnucpu.www.service.AuthService;
 import com.jbnucpu.www.service.DeleteService;
 import com.jbnucpu.www.service.ReadService;
 import lombok.RequiredArgsConstructor;
-import org.aspectj.weaver.ast.Not;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -17,9 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import java.time.format.DecimalStyle;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -83,7 +80,7 @@ public class NoticeController {
 
         NoticeEntity notice = this.readService.processNoticeRead(id);
 
-        if(!authService.getUsername().equals(notice.getUserEntity().getStudentnumber())){
+        if(!authService.getUserStudentnumber().equals(notice.getUserEntity().getStudentnumber())){
             System.out.println("수정 실패: 작성자만 수정 가능");
             return "redirect:/notice";
         }

@@ -15,7 +15,7 @@ public class AuthService {
     private final UserRepository userRepository;
 
     //로그인 아이디 (학번) 가져오기
-    public String getUsername(){
+    public String getUserStudentnumber(){
 
         return SecurityContextHolder.getContext().getAuthentication().getName();
     }
@@ -23,7 +23,7 @@ public class AuthService {
     // 로그인한 유저의 UserEntity id값 가져오기
 
     public Long getUserId(){
-        String studentNumber = this.getUsername();
+        String studentNumber = this.getUserStudentnumber();
         UserEntity user = userRepository.findByStudentnumber(studentNumber);
         return user.getId();
     }

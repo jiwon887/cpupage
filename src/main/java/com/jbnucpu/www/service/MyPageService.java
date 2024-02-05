@@ -7,7 +7,6 @@ import com.jbnucpu.www.repository.ContentRepository;
 import com.jbnucpu.www.repository.NoticeRepository;
 import com.jbnucpu.www.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,7 +34,7 @@ public class MyPageService {
 
         UserEntity user = userRepository.findById(id).orElseThrow(()->new NoSuchElementException("해당 id에 대한 유저를 찾을 수 없습니다."));
 
-        if(!authService.getUsername().equals(user.getStudentnumber())){
+        if(!authService.getUserStudentnumber().equals(user.getStudentnumber())){
             System.out.println("접근 실패: 자신의 마이페이지만 접근 가능");
             return false;
         }
