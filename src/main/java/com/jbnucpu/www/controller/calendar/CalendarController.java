@@ -1,7 +1,10 @@
 package com.jbnucpu.www.controller.calendar;
 
+import com.jbnucpu.www.dto.CalendarDTO;
+import com.jbnucpu.www.service.CalendarService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 
 /**
@@ -13,9 +16,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class CalendarController {
 
+    private final CalendarService calendarService;
+
+    public CalendarController(CalendarService calendarService) {
+
+        this.calendarService = calendarService;
+    }
+
     @GetMapping("/calendar")
     public String calendarAdminPage() {
 
         return "calendar";
+    }
+
+    @PostMapping("/calendar")
+    public String calendarAddSchedule(CalendarDTO calendarDTO) {
+
+        calendarService.addSchedule(calendarDTO);
+
+        return "redirect:/";
     }
 }
