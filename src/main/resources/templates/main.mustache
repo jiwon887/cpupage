@@ -4,6 +4,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.5/index.global.min.js'></script>
     <title>main</title>
 </head>
 <body>
@@ -23,5 +24,26 @@
     {{#activateLogoutButton}}
     <a href="/mypage/{{id}}">마이페이지</a>
     {{/activateLogoutButton}}
+    <hr>
+    <div id='calendar'></div>
+    <script>
+
+        const calendarLocation = document.getElementById('calendar');
+
+        document.addEventListener('DOMContentLoaded', function() {
+
+            const calendar = new FullCalendar.Calendar(calendarLocation, {
+                initialView: 'dayGridMonth',
+                events: [
+                    {
+                        title: 'set',
+                        start: '2020-01-01',
+                        end: '2020-01-01'
+                    }
+                ]
+            });
+            calendar.render();
+        });
+    </script>
 </body>
 </html>
