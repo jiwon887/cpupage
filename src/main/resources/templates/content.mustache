@@ -7,15 +7,35 @@
     <title>Document</title>
 </head>
 <body>
-<h1>Content Page</h1>
-<a href="editor/content">자유글 쓰기</a>
-<div>
-    {{#contentList}}
-        <a href="content/{{id}}"><strong>번호:</strong> {{id}}</a>
-        <strong>이름:</strong> {{userEntity.name}}
-        <strong>제목:</strong> {{title}}
-        <br>
-    {{/contentList}}
-</div>
+    <h1>Content Page</h1>
+    <a href="editor/content">자유글 쓰기</a>
+    <hr>
+    <div>
+        <!--TODO: 게시물 번호 수정-->
+        {{#paging}}
+            <a href="content/{{id}}"><strong>번호:</strong> {{id}}</a>
+            <strong>작성자:</strong> {{userEntity.name}}
+            <strong>제목:</strong> {{title}}
+            <br>
+        {{/paging}}
+    </div>
+    <hr>
+    <ul>
+        {{#hasPrev}}
+            <li style="display: inline">
+                <a class="page-link" href="?page={{prev}}">Previous</a>
+            </li>
+        {{/hasPrev}}
+        {{#pageIndexArray}}
+            <li style="display: inline">
+                <a href="?page={{.}}">{{.}}</a>
+            </li>
+        {{/pageIndexArray}}
+        {{#hasNext}}
+            <li style="display: inline">
+                <a class="page-link" href="?page={{ next }}">Next</a>
+            </li>
+        {{/hasNext}}
+    </ul>
 </body>
 </html>

@@ -40,7 +40,7 @@ public class NoticeController {
     public String notice(Model model, @PageableDefault(size = 3, sort = "createDate", direction = Sort.Direction.DESC) Pageable pageable) {
         Page<NoticeEntity> paging = this.readService.processNoticePageListRead(pageable);
 
-        // 페이지 번호를 표시할 범위 계산
+        // 표시할 페이지 번호 범위 계산
         int currentPageIndex = pageable.getPageNumber();
         int totalPages = paging.getTotalPages();
         int range = 2; // 표시할 페이지 범위 조절 (현재 페이지를 중심으로 양 옆으로 표시)
@@ -62,22 +62,9 @@ public class NoticeController {
         model.addAttribute("hasNext", paging.hasNext()); // 더이상 보여줄 페이지가 없음에도 페이지가 넘어가는 것을 막기 위한 bool
         model.addAttribute("hasPrev", paging.hasPrevious()); // 더이상 보여줄 페이지가 없음에도 페이지가 넘어가는 것을 막기 위한 bool
         model.addAttribute("postNumbers", postNumbers);
+
         return "notice";
     }
-
-//    @GetMapping("/notice")
-//    public String notice(Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
-//        Page<NoticeEntity> paging = this.readService.processNoticePageListRead(page);
-//        model.addAttribute("paging", paging);
-//        return "notice";
-//    }
-
-//    @GetMapping("/notice")
-//    public String notice(Model model) {
-//        List<NoticeEntity> noticeEntityList = readService.processNoticeListRead();
-//        model.addAttribute("noticeList", noticeEntityList);
-//        return "notice";
-//    }
 
     @GetMapping("/notice/{id}")
     public String noticeDetail(Model model, @PathVariable("id") Long id) {

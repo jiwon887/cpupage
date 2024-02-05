@@ -27,9 +27,19 @@ public class ReadService {
         return this.noticeRepository.findAll(pageable);
     }
 
+    public Page<ContentEntity> processContentPageListRead(Pageable pageable) {
+
+        return this.contentRepository.findAll(pageable);
+    }
+
     public List<NoticeEntity> processNoticeListRead() {
 
         return this.noticeRepository.findAll();
+    }
+
+    public List<ContentEntity> processContentListRead() {
+
+        return this.contentRepository.findAll();
     }
 
     public NoticeEntity processNoticeRead(Long id) {
