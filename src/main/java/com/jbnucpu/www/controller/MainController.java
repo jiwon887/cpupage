@@ -4,6 +4,7 @@ import com.jbnucpu.www.dto.CustomUserDetails;
 import com.jbnucpu.www.entity.UserEntity;
 import com.jbnucpu.www.repository.UserRepository;
 import com.jbnucpu.www.service.AuthService;
+import com.jbnucpu.www.service.CalendarService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ public class MainController {
     private final UserRepository userRepository;
 
     private final AuthService authService;
+    private final CalendarService calendarService;
 
     @GetMapping("/")
     public String mainPage(Model model){
@@ -49,6 +51,7 @@ public class MainController {
             else return "main";
         }
 
+        model.addAttribute("CALENDAR", calendarService.findAllSchedule());
 
         return "main";
     }

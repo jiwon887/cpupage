@@ -36,7 +36,15 @@
             const calendar = new FullCalendar.Calendar(calendarLocation, {
                 initialView: 'dayGridMonth',
                 events: [
+                    {{#CALENDAR}}
+                        {
+                            title: '{{title}}',
+                            start: '{{start}}',
+                            end: '{{end}}'
+                        },
+                    {{/CALENDAR}}
                     {
+
                         title: 'set',
                         start: '2020-01-01',
                         end: '2020-01-01'
