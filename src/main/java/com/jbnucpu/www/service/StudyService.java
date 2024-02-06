@@ -38,7 +38,6 @@ public class StudyService {
      * @return this.studyRepository.findAll()
      */
     public List<StudyEntity> getList(){
-        System.out.println("studyRepository.findAll()실행----->");
         return this.studyRepository.findAll();
     }
     /**
