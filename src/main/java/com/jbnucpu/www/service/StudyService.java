@@ -38,8 +38,20 @@ public class StudyService {
      * @return this.studyRepository.findAll()
      */
     public List<StudyEntity> getList(){
-        System.out.println("studyRepository.findAll()실행----->");
         return this.studyRepository.findAll();
+    }
+
+    public List<StudyEntity> getAcceptedBasicStudyList(){
+        return this.studyRepository.findAllAcceptedBasicStudies();
+    }
+    public List<StudyEntity> getUnacceptedBasicStudyList(){
+        return this.studyRepository.findAllUnacceptedBasicStudies();
+    }
+    public List<StudyEntity> getAcceptedSelfStudyList(){
+        return this.studyRepository.findAllAcceptedSelfStudies();
+    }
+    public List<StudyEntity> getUnacceptedSelfStudyList(){
+        return this.studyRepository.findAllUnacceptedSelfStudies();
     }
     /**
      * 특정 번호의 엔티티값

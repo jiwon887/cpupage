@@ -23,7 +23,10 @@ public class StudyController {
     // 스터디 메인 (스터디 목록 보여줌)
     @GetMapping("/study")
     public String studyList(Model model){
-        model.addAttribute("studyEntityList_data",studyService.getList());
+        model.addAttribute("AcceptedBasic_data",studyService.getAcceptedBasicStudyList());
+        model.addAttribute("UnacceptedBasic_data",studyService.getUnacceptedBasicStudyList());
+        model.addAttribute("AcceptedSelf_data",studyService.getAcceptedSelfStudyList());
+        model.addAttribute("UnacceptedSelf_data",studyService.getUnacceptedSelfStudyList());
         return "studylist";
     }
 

@@ -1,24 +1,129 @@
-<h1>개설 스터디 리스트</h1>
-<div>
-    <table>
-        <thead>
-        <tr>
-            <th>id</th>
-            <th>title</th>
-        </tr>
-        </thead>
-        <tbody>
-        {{#studyEntityList_data}}
-            <tr>
-                <td>{{id}}</td>
-                <td>{{title}}</td>
-                <td>
-                    <form action="/study/{{id}}" method="get" name="study">
-                        <input type="submit" class="btn btn-primary" id="btn-save" value="세부 조회">
-                    </form>
-                </td>
-            </tr>
-        {{/studyEntityList_data}}
-        </tbody>
-    </table>
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+    }
+</style>
+<div style="width: 1000px; padding: 10px">
+    <h1>개설 스터디 리스트</h1>
+    <!--왼쪽박스-->
+    <div style="width: 48%; height: 800px; background: beige; float: left; border: 2px solid black; padding: 5px;">
+        <div style="width: 98%; height: auto; background: rgb(231,180,79); padding: 5px">
+            <p>기본 스터디</p>
+            <div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>title</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#AcceptedBasic_data}}
+                        <tr>
+                            <td>{{id}}</td>
+                            <td>{{title}}</td>
+                            <td>
+                                <form action="/study/{{id}}" method="get" name="study">
+                                    <input type="submit" class="btn btn-primary" id="btn-save" value="세부 조회">
+                                </form>
+                            </td>
+                        </tr>
+                    {{/AcceptedBasic_data}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div style="width: 98%; height: auto; background: rgb(234,216,209); padding: 5px;">
+            <p>미승인 기본 스터디</p>
+            <table>
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>title</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#UnacceptedBasic_data}}
+                    <tr>
+                        <td>{{id}}</td>
+                        <td>{{title}}</td>
+                        <td>
+                            <form action="/study/{{id}}" method="get" name="study">
+                                <input type="submit" class="btn btn-primary" id="btn-save" value="세부 조회">
+                            </form>
+                        </td>
+                    </tr>
+                {{/UnacceptedBasic_data}}
+                </tbody>
+            </table>
+        </div>
+        <!--대기스터디 명단-->
+    </div>
+    <!--오른쪽박스-->
+    <div style="width: 48%; height: 800px; background: azure; float: right; border: 2px solid black; padding: 5px;">
+        <div style="width: 98%; height: auto; background: aquamarine; padding: 5px">
+            <p>자율 스터디</p>
+            <div>
+                <!--대기스터디 명단-->
+                <table>
+                    <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>title</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#AcceptedSelf_data}}
+                        <tr>
+                            <td>{{id}}</td>
+                            <td>{{title}}</td>
+                            <td>
+                                <form action="/study/{{id}}" method="get" name="study">
+                                    <input type="submit" class="btn btn-primary" id="btn-save" value="세부 조회">
+                                </form>
+                            </td>
+                        </tr>
+                    {{/AcceptedSelf_data}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div style="width: 98%; height: auto; background: rgb(179,213,179); padding: 5px;">
+            <p>미승인 자율 스터디</p>
+            <table>
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>title</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#UnacceptedSelf_data}}
+                    <tr>
+                        <td>{{id}}</td>
+                        <td>{{title}}</td>
+                        <td>
+                            <form action="/study/{{id}}" method="get" name="study">
+                                <input type="submit" class="btn btn-primary" id="btn-save" value="세부 조회">
+                            </form>
+                        </td>
+                    </tr>
+                {{/UnacceptedSelf_data}}
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
