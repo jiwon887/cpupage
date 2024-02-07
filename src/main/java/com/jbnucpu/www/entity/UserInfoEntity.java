@@ -1,6 +1,5 @@
 package com.jbnucpu.www.entity;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import lombok.Getter;
