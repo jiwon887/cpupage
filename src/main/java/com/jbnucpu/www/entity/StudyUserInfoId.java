@@ -8,9 +8,9 @@ import java.io.Serializable;
 
 @Embeddable
 @Getter @Setter
-public class UserInfoId implements Serializable {
-    private Long studentId;
+public class StudyUserInfoId implements Serializable {
+    private String studentId;
     private Long studyId;
 
-    public UserInfoId() {}
+    public StudyUserInfoId() {}
 }

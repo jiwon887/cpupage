@@ -1,11 +1,11 @@
 package com.jbnucpu.www.service;
 
 import com.jbnucpu.www.dto.StudyDTO;
-import com.jbnucpu.www.entity.StudyEnrollEntity;
-import com.jbnucpu.www.entity.StudyEntity;
-import com.jbnucpu.www.entity.UserEntity;
+import com.jbnucpu.www.dto.StudyUserInfoDTO;
+import com.jbnucpu.www.entity.*;
 import com.jbnucpu.www.repository.StudyEnrollRepository;
 import com.jbnucpu.www.repository.StudyRepository;
+import com.jbnucpu.www.repository.StudyUserInfoRepository;
 import com.jbnucpu.www.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -26,11 +26,13 @@ public class StudyService {
     private final StudyEnrollRepository studyEnrollRepository;
     private final AuthService authService;
     private final UserRepository userRepository;
-    public StudyService(StudyRepository studyRepository,StudyEnrollRepository studyEnrollRepository,AuthService authService,UserRepository userRepository){
+    private final StudyUserInfoRepository studyUserInfoRepository;
+    public StudyService(StudyRepository studyRepository,StudyEnrollRepository studyEnrollRepository,AuthService authService,UserRepository userRepository,StudyUserInfoRepository studyUserInfoRepository){
         this.studyRepository = studyRepository;
         this.studyEnrollRepository=studyEnrollRepository;
         this.authService=authService;
         this.userRepository=userRepository;
+        this.studyUserInfoRepository=studyUserInfoRepository;
     }
 
     /**
@@ -135,7 +137,7 @@ public class StudyService {
      * @return 가입성공하면 true 실패하면 false
      * @todo 맵핑 정상적으로 되었는지 DB로 확인하기
      */
-    public Boolean applyStudy(Long no){
+    public Boolean joinStudy(Long no, StudyUserInfoDTO studyUserInfoDTO){
         if(!authService.isAuthenticated()){
             System.out.println("신청실패: 로그인 안 한 상태로 신청");
             return false;
@@ -149,8 +151,10 @@ public class StudyService {
         }
 
         //이하 주석은 모든 코드 정상동작 확인 시점에서 삭제하겠음
+        /*userEntity studyEntity간 처리*/
         //1.새로운 엔티티 생성
         StudyEnrollEntity enrollEntity = new StudyEnrollEntity();
+
         //2.enrollEntityEntity에 userEntity 맵핑
         UserEntity userEntity = userRepository.findByStudentnumber(authService.getUserStudentnumber());//주의 getUsername()해당메소드 학번반환함 이름 반환안함
         enrollEntity.setUserEntity(userEntity);
@@ -163,7 +167,22 @@ public class StudyService {
         tempEnrollEntities_User.add(enrollEntity);
         userEntity.setStudyEnrollEntities(tempEnrollEntities_User);
 
+        /*StudyUserInfoEntity 생성*/
+        StudyUserInfoEntity studyUserInfoEntity = new StudyUserInfoEntity();
+        //studyUserInfoId타입 id를 제외한 항목은 studyUserInfoDTO에 있음
+        studyUserInfoEntity.setKnowledge(studyUserInfoDTO.getKnowledge());
+        studyUserInfoEntity.setAvailableTime(studyUserInfoDTO.getAvailableTime());
+        studyUserInfoEntity.setStudyGoal(studyUserInfoDTO.getStudyGoal());
+
+        //id(복합키)를 넣기 위해 studyUserInfoId객체를 만들어 넣는다
+        StudyUserInfoId studyUserInfoId = new StudyUserInfoId();
+        studyUserInfoId.setStudyId(no);//어떤 스터디인지는 no로 알 수 있다
+        studyUserInfoId.setStudentId(authService.getUserStudentnumber());//누가 신청하는지는 현재 로그인 사용자 학번을 따오면 된다
+        studyUserInfoEntity.setId(studyUserInfoId);
+
         userRepository.save(userEntity);
+        studyUserInfoRepository.save(studyUserInfoEntity);
+
         return true;
     }
 

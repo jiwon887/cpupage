@@ -8,9 +8,9 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class UserInfoEntity {
+public class StudyUserInfoEntity {
     @EmbeddedId
-    private UserInfoId id;
+    private StudyUserInfoId id;
 
     private String knowledge;
     private String availableTime;

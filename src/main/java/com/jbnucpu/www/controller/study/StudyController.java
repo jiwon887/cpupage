@@ -1,6 +1,7 @@
 package com.jbnucpu.www.controller.study;
 
 import com.jbnucpu.www.dto.StudyDTO;
+import com.jbnucpu.www.dto.StudyUserInfoDTO;
 import com.jbnucpu.www.service.StudyService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class StudyController {
@@ -85,11 +87,15 @@ public class StudyController {
         return "redirect:/study";
     }
 
-    // 스터디 신청
-    @PostMapping("/study/apply/{no}")
-    public String studyApply(@PathVariable("no")Long no){
-        studyService.applyStudy(no);
-
+    // 스터디 참가
+    @GetMapping("/study/join/{no}")
+    public String studyJoinForm(@PathVariable("no")Long no, Model model){
+        model.addAttribute("studyEntity_data",studyService.findStudy(no));
+        return "studyJoinForm";
+    }
+    @PostMapping("/study/join/{no}")
+    public String studyJoin(@PathVariable("no")Long no, @Valid StudyUserInfoDTO studyUserInfoDTO) {
+        studyService.joinStudy(no,studyUserInfoDTO);
         return "redirect:/study/{no}";
     }
 
@@ -99,5 +105,4 @@ public class StudyController {
         studyService.quitStudy();
         return "redirect:/study/{no}";
     }
-
 }

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="css\layout-style.css">
+</head>
+<body>
+<h1>스터디 가입 요청</h1>
+{{#errorMessage}}
+    <p style="color: red;">{{errorMessage}}</p>
+{{/errorMessage}}
+<form action="/study/join/{{studyEntity_data.id}}" method="post" name="study">
+    <div>
+        현재 가입 요청중인 스터디명:{{studyEntity_data.title}}
+    </div>
+
+    <div>
+        <label for="knowledge">스터디 관련 사전지식</label>
+        <input name="knowledge" type="text" class="form-control" id="knowledge" placeholder="주제 관련되어 배운 경험이 있다면 작성해주세요" style="width:300px;height:100px;">
+    </div>
+    <div>
+        <label for="availableTime">가능한 날짜/시간</label>
+        <input name="availableTime" type="text" class="form-control" id="availableTime" placeholder="가용 시간대를 자세히 적어주세요" style="width:300px;height:100px;">
+    </div>
+    <div>
+        <label for="studyGoal">스터디 목표</label>
+        <input name="studyGoal" type="text" class="form-control" id="studyGoal" placeholder="해당 스터디를 듣는 목적이 있나요?" style="width:300px;height:100px;">
+    </div>
+    <input type="submit" class="btn btn-primary" id="btn-save" value="가입요청">
+</form>
+<p>별도의 승인이 필요없는 스터디는 가입요청 즉시 스터디원으로 등록됩니다!</p>
+</body>
+</html>
