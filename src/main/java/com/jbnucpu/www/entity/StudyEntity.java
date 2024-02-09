@@ -43,4 +43,9 @@ public class StudyEntity {
     @OneToMany(mappedBy = "studyEntity",cascade = CascadeType.ALL)
     private Set<StudyEnrollEntity> studyEnrollEntities = new HashSet<StudyEnrollEntity>();
 
+
+    public StudyDTO getStudyInfo(){
+        return new StudyDTO(this.title, this.studySubject);
+    }
+
 }

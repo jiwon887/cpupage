@@ -1,5 +1,7 @@
 package com.jbnucpu.www.entity;
 
+import com.jbnucpu.www.dto.SignUpDTO;
+import com.jbnucpu.www.dto.UserInfoDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -53,5 +55,11 @@ public class UserEntity {
 
     @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL)
     private List<NoticeEntity> noticeEntities;
+
+
+
+    public UserInfoDTO getUserInfo(){
+        return new UserInfoDTO(this.name, this.studentnumber,this.enrolldate);
+    }
 
 }

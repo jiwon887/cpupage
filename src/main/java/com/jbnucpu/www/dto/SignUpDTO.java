@@ -18,7 +18,7 @@ public class SignUpDTO {
     private String department; // 학과
     private Boolean isregistered = false; // 재학 상태 (True => 재학, False => 휴학)
     private String grade;
-
+    private String enroll;
     private String phonenumber;
 
     public UserEntity toEntity() {

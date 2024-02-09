@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User List</title>
+</head>
+<body>
+<h1>User List</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Student Number</th>
+        <th>Enroll Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#allUser}}
+    <tr>
+        <td>{{name}}</td>
+        <td>{{studentnumber}}</td>
+        <td>{{enrolldate}}</td>
+    </tr>
+    {{/allUser}}
+    </tbody>
+</table>
+</body>
+</html>

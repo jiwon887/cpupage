@@ -41,4 +41,9 @@ public class StudyDTO {
 
         return studyEntity;
     }
+
+    public StudyDTO(String title, String studySubject){
+        this.title = title;
+        this.studySubject = studySubject;
+    }
 }
