@@ -25,7 +25,10 @@
                 <form action="/admin_update" method="post">
                     <input type="hidden" name="studentNumber" value="{{studentNumber}}">
                     <input type="hidden" name="currentRole" value="{{role}}">
-                    <button type="submit">{{#isUserRole}}관리자로 변경{{/isUserRole}}{{^isUserRole}}일반 회원으로 변경{{/isUserRole}}</button>
+                    <button type="submit">{{#isUserRole}}관리자로 변경{{/isUserRole}}
+                        {{^isUserRole}}정회원으로 변경{{/isUserRole}}
+                        {{^isUserRole}}비회원으로 변경{{/isUserRole}}
+                    </button>
                 </form>
             </td>
         </tr>

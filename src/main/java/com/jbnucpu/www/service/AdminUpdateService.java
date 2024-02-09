@@ -27,9 +27,19 @@ public class AdminUpdateService {
         this.userRepository = userRepository;
     }
 
-    //public UserEntity getUserInfo(String studenNumber){
-    //    return userRepository.findByStudentnumber(studenNumber);
-    //}
+    @Transactional
+    public String updateUserRole(String studentNumber, String newRole){
+        UserEntity user = userRepository.findByStudentnumber(studentNumber);
+        if(user == null){
+            throw  new UsernameNotFoundException("해당 사용자를 찾을 수 엄슴");
+        }
+        user.setRole(newRole);
+        userRepository.save(user);
+
+        return "/admin_main";
+    }
+
+
 
     @Transactional
     public String adminUpdateMember(String studentNumber, String newPassword, String newName, String newPhoneNumber,
