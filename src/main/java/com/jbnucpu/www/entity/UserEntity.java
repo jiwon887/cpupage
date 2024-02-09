@@ -59,7 +59,7 @@ public class UserEntity {
 
 
     public UserInfoDTO getUserInfo(){
-        return new UserInfoDTO(this.name, this.studentnumber,this.enrolldate);
+        return new UserInfoDTO(this.name, this.studentnumber,this.role);
     }
 
 }

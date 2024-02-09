@@ -9,18 +9,26 @@
 <table>
     <thead>
     <tr>
-        <th>Name</th>
-        <th>Student Number</th>
-        <th>Enroll Date</th>
+        <th>이름</th>
+        <th>학번</th>
+        <th>회원 등급</th>
+        <th>변경</th>
     </tr>
     </thead>
     <tbody>
     {{#allUser}}
-    <tr>
-        <td>{{name}}</td>
-        <td>{{studentnumber}}</td>
-        <td>{{enrolldate}}</td>
-    </tr>
+        <tr>
+            <td>{{name}}</td>
+            <td>{{studentNumber}}</td>
+            <td>{{role}}</td>
+            <td>
+                <form action="/admin_update" method="post">
+                    <input type="hidden" name="studentNumber" value="{{studentNumber}}">
+                    <input type="hidden" name="currentRole" value="{{role}}">
+                    <button type="submit">{{#isUserRole}}관리자로 변경{{/isUserRole}}{{^isUserRole}}일반 회원으로 변경{{/isUserRole}}</button>
+                </form>
+            </td>
+        </tr>
     {{/allUser}}
     </tbody>
 </table>

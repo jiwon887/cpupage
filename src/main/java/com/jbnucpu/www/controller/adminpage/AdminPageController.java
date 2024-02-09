@@ -31,7 +31,7 @@ public class AdminPageController {
         List<UserInfoDTO> userList = adminService.getAllMembers();
         model.addAttribute("allUser",userList);
 
-        return "admin_user";
+        return "admin_userlist";
     }
 
     @GetMapping("/admin_studylist")
@@ -39,7 +39,7 @@ public class AdminPageController {
         List<StudyDTO> studyList = adminService.getAllStudy();
         model.addAttribute("allStudy",studyList);
 
-        return "admin_study";
+        return "admin_studylist";
     }
 
 
