@@ -1,11 +1,10 @@
 package com.jbnucpu.www.service;
 
-import com.jbnucpu.www.dto.CustomUserDetails;
+
 import com.jbnucpu.www.entity.UserEntity;
 import com.jbnucpu.www.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -22,19 +21,22 @@ public class AdminUpdateService {
 
     private final UserRepository userRepository;
 
+
     @Autowired
-    public AdminUpdateService(UserRepository userRepository){
+    public AdminUpdateService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
+    //public UserEntity getUserInfo(String studenNumber){
+    //    return userRepository.findByStudentnumber(studenNumber);
+    //}
+
     @Transactional
-    public String adminUpdateMember(String newPassword, String newName, String newPhoneNumber,
+    public String adminUpdateMember(String studentNumber, String newPassword, String newName, String newPhoneNumber,
                                     String newNickName, String newRole){
 
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        String studentNumber = ((CustomUserDetails) principal).getUsername(); // 학번 가져오기
         UserEntity user = userRepository.findByStudentnumber(studentNumber);
+
 
         if (user == null) {
             throw new UsernameNotFoundException("해당 사용자를 찾을 수 없습니다.");
@@ -64,6 +66,6 @@ public class AdminUpdateService {
 
         userRepository.save(user);
 
-        return ("/");
+        return ("/admin_main");
     }
 }
