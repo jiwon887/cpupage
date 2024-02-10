@@ -28,11 +28,10 @@ public class AdminUpdateController {
                                    @RequestParam("studentNumber") String studentNumber,
                                    @RequestParam("newName") String newName,
                                    @RequestParam("newPhoneNumber") String newPhoneNumber,
-                                   @RequestParam("newNickname") String newNickname,
-                                   @RequestParam("newRole") String newRole) {
+                                   @RequestParam("newNickname") String newNickname) {
 
 
-        adminUpdateService.adminUpdateMember(studentNumber, newPassword, newName, newPhoneNumber, newNickname, newRole);
+        adminUpdateService.adminUpdateMember(studentNumber, newPassword, newName, newPhoneNumber, newNickname);
 
 
         return "redirect:/admin_main";

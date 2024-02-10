@@ -43,7 +43,7 @@ public class AdminUpdateService {
 
     @Transactional
     public String adminUpdateMember(String studentNumber, String newPassword, String newName, String newPhoneNumber,
-                                    String newNickName, String newRole){
+                                    String newNickName){
 
         UserEntity user = userRepository.findByStudentnumber(studentNumber);
 
@@ -70,9 +70,6 @@ public class AdminUpdateService {
             user.setNickname(newNickName);
         }
 
-        if (newRole !=null){
-            user.setEnrolldate(newRole);
-        }
 
         userRepository.save(user);
 
