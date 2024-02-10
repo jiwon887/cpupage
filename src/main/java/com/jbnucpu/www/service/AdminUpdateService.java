@@ -33,6 +33,8 @@ public class AdminUpdateService {
         if(user == null){
             throw  new UsernameNotFoundException("해당 사용자를 찾을 수 엄슴");
         }
+
+        System.out.println("정상적으로 바뀜");
         user.setRole(newRole);
         userRepository.save(user);
 

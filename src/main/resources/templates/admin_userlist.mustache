@@ -3,6 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>User List</title>
+    <script>
+        // JavaScript 함수를 사용하여 역할 순환 로직 구현
+        function cycleRole(roleElement) {
+            var roles = ['관리자', '정회원', '비회원']; // 역할 순환을 정의합니다.
+            var currentRole = roleElement.innerText.trim(); // 현재 역할을 가져옵니다.
+
+            // 다음 역할을 결정합니다.
+            var nextRoleIndex = (roles.indexOf(currentRole) + 1) % roles.length;
+            var nextRole = roles[nextRoleIndex];
+
+            roleElement.innerText = nextRole; // 다음 역할을 버튼에 표시합니다.
+        }
+    </script>
 </head>
 <body>
 <h1>User List</h1>
@@ -20,16 +33,11 @@
         <tr>
             <td><a href="/admin_update?studentNumber={{studentNumber}}">{{name}}</a></td>
             <td>{{studentNumber}}</td>
-            <td>{{role}}</td>
+            <td id="role_{{studentNumber}}">{{role}}</td> <!-- 역할을 변경할 엘리먼트에 ID를 추가합니다. -->
             <td>
-                <form action="/admin_update" method="post">
-                    <input type="hidden" name="studentNumber" value="{{studentNumber}}">
-                    <input type="hidden" name="currentRole" value="{{role}}">
-                    <button type="submit">{{#isUserRole}}관리자로 변경{{/isUserRole}}
-                        {{^isUserRole}}정회원으로 변경{{/isUserRole}}
-                        {{^isUserRole}}비회원으로 변경{{/isUserRole}}
-                    </button>
-                </form>
+                <button type="button" onclick="cycleRole(document.getElementById('role_{{studentNumber}}'))">
+                    역할 변경
+                </button>
             </td>
         </tr>
     {{/allUser}}
